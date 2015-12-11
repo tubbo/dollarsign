@@ -1,0 +1,24 @@
+{
+  "name": "nquery",
+  "version": "1.0.0",
+  "description": "native jquery",
+  "main": "lib/nquery.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tubbo/nquery.git"
+  },
+  "keywords": [
+    "nquery",
+    "jquery",
+    "dom selector"
+  ],
+  "author": "Tom Scott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tubbo/nquery/issues"
+  },
+  "homepage": "https://github.com/tubbo/nquery#readme"
+}

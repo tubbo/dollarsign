@@ -1,0 +1,13 @@
+{
+  "source": {
+    "includePattern": ".+\\lib\/.js(doc)?$",
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "destination": "./doc/"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  }
+}
