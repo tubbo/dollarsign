@@ -111,7 +111,7 @@ class NQuery {
    * @return {NQuery}
    */
   closest(selector) {
-    return new NQuery(scope, selector);
+    return new NQuery(this.elements[0].parent, selector);
   }
 }
 
