@@ -8,7 +8,7 @@
  * @module nquery
  *
  */
-class NQuery {
+export class NQuery {
   /**
    * @constructor
    * @param {HTMLDocument} scope - The global document at the time of
@@ -124,7 +124,6 @@ class NQuery {
  * @return {NQuery}
  * @module nquery
  */
-export default function(selector, scope) {
-  let dom = scope || document;
-  return new NQuery(dom, selector);
+export default function(selector, scope = document) {
+  return new NQuery(scope, selector);
 }
