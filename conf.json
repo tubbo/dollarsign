@@ -3,6 +3,7 @@
     "destination": "./docs"
   },
   "templates": {
-    "systemName": "nQuery"
+    "systemName": "nQuery",
+    "includeDate": false
   }
 }
