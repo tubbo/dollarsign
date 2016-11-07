@@ -1,9 +1,8 @@
 {
   "opts": {
-    "destination": "./docs",
-    "template": "./node_modules/minami"
+    "destination": "./docs"
   },
   "templates": {
-    "applicationName": "nQuery"
+    "systemName": "nQuery"
   }
 }
