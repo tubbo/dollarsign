@@ -1,13 +1,9 @@
 {
-  "source": {
-    "includePattern": ".+\\lib\/.js(doc)?$",
-  },
-  "plugins": ["plugins/markdown"],
   "opts": {
-    "destination": "./doc/"
+    "destination": "./docs",
+    "template": "./node_modules/minami"
   },
-  "tags": {
-    "allowUnknownTags": true,
-    "dictionaries": ["jsdoc", "closure"]
+  "templates": {
+    "applicationName": "nQuery"
   }
 }

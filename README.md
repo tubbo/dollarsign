@@ -6,19 +6,18 @@ basic browser functionality into a more consistent API.
 ## Installation
 
 ```bash
-$ jspm install nquery --save
+$ npm install nquery --save
 ```
 
 ## Usage
 
 ```javascript
-// application.js
-
 import $ from 'nquery';
 
 $('#change-color').on('click', function(event) {
   event.preventDefault();
   $('h1').css({ color: '#ff000' });
+});
 ```
 
 ```html
@@ -33,7 +32,7 @@ $('#change-color').on('click', function(event) {
 
 ## Development
 
-To compile NQuery locally, download the Git repository:
+To compile nQuery locally, download the Git repository:
 
 ```bash
 $ git clone https://github.com/tubbo/nquery.git
