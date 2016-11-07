@@ -192,11 +192,10 @@ export class NQuery {
  * @module nquery
  * @function $
  * @param {string} selector - Query to run for selecting elements.
- * @param {HTMLNode} scope (optional) - DOM to manipulate, `document` by default
+ * @param {HTMLNode} scope - DOM to manipulate. Default: `document`.
  * @return {NQuery} the object created from selector and scope.
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
-export default function(selector, scope) {
-  scope = scope || document;
+export default function(selector, scope = document) {
   return new NQuery(scope, selector);
 }
