@@ -11,9 +11,9 @@
 export class NQuery {
   /**
    * @constructor
-   * @param {HTMLDocument} scope - The global document at the time of
+   * @param HTMLDocument scope - The global document at the time of
    * instantiation.
-   * @param {string} selector - A CSS-style selector used for picking
+   * @param string selector - A CSS-style selector used for picking
    * out DOM objects.
    */
   constructor(scope, selector) {
@@ -25,7 +25,7 @@ export class NQuery {
   /**
    * Return all elements selected by the given `selector`.
    *
-   * @return {Array<HTMLElement>} all elements in the selection
+   * @return Array all elements in the selection
    */
   get elements() {
     return this.document.getElementsBySelector(this.selector);
@@ -34,20 +34,32 @@ export class NQuery {
   /**
    * Iterate over every element with the given callback function.
    *
-   * @param {function} callback
-   * @return {this}
+   * @param function callback
+   * @return NQuery this object
    */
   each(callback) {
-    return this.elements.forEach(callback);
+    this.elements.forEach(callback);
+    return this;
+  }
+
+  /**
+   * Iterate over every element with the given callback function and
+   * return a new array with the return result of each callback.
+   *
+   * @param function callback
+   * @return Array
+   */
+  map(callback) {
+    return this.elements.map(callback);
   }
 
   /**
    * Bind an event to the elements in this selection.
    *
-   * @param {string} event - Name of the event to be bound.
-   * @param {function} callback - Callback function to be executed when
+   * @param string event - Name of the event to be bound.
+   * @param function callback - Callback function to be executed when
    * event fires.
-   * @return {this}
+   * @return NQuery this object
    */
   on(event, callback) {
     this.each(element => element.addEventListener(event, callback));
@@ -58,8 +70,8 @@ export class NQuery {
   /**
    * Unbind an event from the elements in this selection.
    *
-   * @param {string} event - Name of the event to be unbound.
-   * @return {this}
+   * @param string event - Name of the event to be unbound.
+   * @return NQuery this object
    */
   off(event) {
     this.each(element => element.removeEventListener(event));
@@ -70,7 +82,8 @@ export class NQuery {
   /**
    * Alter CSS for all elements in the selection.
    *
-   * @return {this}
+   * @param object Hash of CSS rules to apply to each element.
+   * @return NQuery this object
    */
   css(updates = {}) {
     Object.keys(updates).forEach(function(rule) {
@@ -82,10 +95,10 @@ export class NQuery {
   }
 
   /**
-   * Alter attributes.
+   * Alter attributes for all elements in the selection.
    *
-   * @param {string} key
-   * @param value
+   * @param string key
+   * @param NQuery this object
    */
   attr(updates = {}) {
     Object.keys(updates).forEach(function(attribute) {
@@ -97,8 +110,8 @@ export class NQuery {
   /**
    * Return an NQuery object for DOM elements undernerath this selector.
    *
-   * @param {string} selector
-   * @return {NQuery}
+   * @param string selector
+   * @return NQuery object for selection beneath current object scope.
    */
   find(selector) {
     return new NQuery(this.elements[0], selector);
@@ -107,23 +120,81 @@ export class NQuery {
   /**
    * Return an NQuery object for DOM elements above this selector.
    *
-   * @param {string} selector
-   * @return {NQuery}
+   * @param string selector
+   * @return NQuery object for selection underneath parent scope.
    */
   closest(selector) {
     return new NQuery(this.elements[0].parent, selector);
   }
+
+  /**
+   * All CSS classes associated with this element.
+   *
+   * @return array of strings
+   */
+  get classes() {
+    return [].concat(this.map((element) => element.class.split("\s")));
+  }
+
+  /**
+   * Test whether the given class is associated with these elements.
+   *
+   * @param string name
+   * @return boolean whether the class is applied to this element.
+   */
+  hasClass(name) {
+    return this.classes.includes(name);
+  }
+
+  /**
+   * Add class name to elements in query.
+   *
+   * @param string name
+   * @return NQuery this object.
+   */
+  addClass(name) {
+    if (!this.hasClass(name)) {
+      this.classes += name;
+    }
+    return _updateClass();
+  }
+
+  /**
+   * Remove class name from elements in query.
+   *
+   * @param string name
+   * @return NQuery this object.
+   */
+  removeClass(name) {
+    if (this.hasClass(name)) {
+      this.classes = this.classes.splice(this.classes.indexOf(name), 1);
+      return _updateClass();
+    } else {
+      return this;
+    }
+  }
+
+  /**
+   * Update class name of elements in query with the array stored in
+   * `classes`.
+   *
+   * @return NQuery this object.
+   */
+  _updateClass() {
+    return this.each((element) => element.class = this.classes.join("\s"));
+  }
 }
 
 /**
- * "Main" method that is exported as `$`. All this does is instantiate
- * an `NQuery` object, then return it.
+ * Create a new NQuery object using the given selector and scope. If no
+ * scope is provided, use the `document` to get the global page scope.
  *
- * @param {string} selector
- * @param {Object} scope
- * @return {NQuery}
+ * @param string selector - Query to run for selecting elements.
+ * @param Object scope (optional) - DOM to manipulate, `document` by default
+ * @return NQuery the object created from selector and scope.
  * @module nquery
  */
-export default function(selector, scope = document) {
+export default function(selector, scope) {
+  scope = scope || document;
   return new NQuery(scope, selector);
 }

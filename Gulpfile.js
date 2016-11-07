@@ -5,6 +5,8 @@ const del = require('del');
 const concat = require('gulp-concat');
 const pump = require('pump');
 const uglify = require('gulp-uglify');
+const tar = require('gulp-tar');
+const gzip = require('gulp-gzip');
 
 gulp.task('compile', function() {
   gulp.src('src/**/*.js')
@@ -26,4 +28,11 @@ gulp.task('compress', function(callback) {
   );
 });
 
-gulp.task('default', ['compile', 'compress']);
+gulp.task('package', function() {
+  gulp.src('./pkg/*')
+    .pipe(tar('nquery.tar'))
+    .pipe(gzip())
+    .pipe(gulp.dest('.'));
+});
+
+gulp.task('default', ['compile', 'compress', 'package']);
