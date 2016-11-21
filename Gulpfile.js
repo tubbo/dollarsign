@@ -10,6 +10,7 @@ const gzip = require('gulp-gzip');
 const jsdoc = require('gulp-jsdoc3');
 const exec = require('gulp-exec');
 const print = require('gulp-print');
+const qunit = require('node-qunit-phantomjs');
 
 // compiles src/ files into lib/ with babel
 gulp.task('compile', function() {
@@ -48,6 +49,10 @@ gulp.task('docs', function(callback) {
 
 gulp.task('clean', function() {
   exec('rm -rf docs lib pkg');
+});
+
+gulp.task('test', function() {
+  qunit('test/runner.html');
 });
 
 gulp.task('default', ['clean', 'docs', 'compile', 'compress', 'package']);

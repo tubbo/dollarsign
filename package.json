@@ -37,7 +37,11 @@
     "gulp-uglify": "^2.0.0",
     "jaguarjs-jsdoc": "^1.0.1",
     "jsdoc": "^3.4.2",
+    "jspm": "^0.16.47",
     "minami": "^1.1.1",
-    "pump": "^1.0.1"
+    "node-qunit-phantomjs": "^1.4.0",
+    "pump": "^1.0.1",
+    "qunit": "^0.9.1",
+    "systemjs": "^0.19.40"
   }
 }

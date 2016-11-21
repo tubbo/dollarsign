@@ -1,11 +1,11 @@
 /**
- * Represents a collection of DOM elements grouped by the given
+ * The NQuery object represents a collection of DOM elements grouped by the given
  * `selector`. Wraps basic browser functionality into a more consistent
  * and concise API.
  *
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
-export class NQuery {
+class NQuery {
   /**
    * @constructor
    */
@@ -17,16 +17,27 @@ export class NQuery {
 
   /**
    * All elements matching the given `selector`.
+   *
+   * @return {Array<HTMLNode>}
    */
   get elements() {
-    return this.document.getElementsBySelector(this.selector);
+    var nodes = [];
+
+    if (typeof this.document.forEach === 'array') {
+      this.document.forEach(function(scope) {
+        scope.getElementsBySelector(this.selector).forEach(function(element) {
+          nodes.push(element);
+        });
+      });
+    } else {
+      nodes = this.document.getElementsBySelector(this.selector);
+    }
+
+    return nodes;
   }
 
-  /**
-   * All CSS classes associated with this element.
-   */
-  get classes() {
-    return [].concat(this.map((element) => element.class.split("\s")));
+  get length() {
+    return this.elements.length;
   }
 
   /**
@@ -44,8 +55,8 @@ export class NQuery {
    * Iterate over every element with the given callback function and
    * return a new array with the return result of each callback.
    *
-    * @param {function} callback - Function to call on each iteration.
-    *                              Each return value becomes part of the Array returned.
+   * @param {function} callback - Function to call on each iteration.
+   *                              Each return value becomes part of the Array returned.
    * @return {Array}
    */
   map(callback) {
@@ -80,6 +91,7 @@ export class NQuery {
 
   /**
    * Trigger an event on all elements in this object.
+   *
    * @param {string} event - Name of the event to trigger.
    * @return {NQuery} this object
    */
@@ -122,7 +134,7 @@ export class NQuery {
    * @return {NQuery} New NQuery object representing selection.
    */
   find(selector) {
-    return new NQuery(this.elements[0], selector);
+    return new NQuery(this.elements, selector);
   }
 
   /**
@@ -132,7 +144,8 @@ export class NQuery {
    * @return {NQuery} New NQuery object representing selection.
    */
   closest(selector) {
-    return new NQuery(this.elements[0].parent, selector);
+    var parents = this.map((element) => element.parent);
+    return new NQuery(parents, selector);
   }
 
   /**
@@ -142,7 +155,13 @@ export class NQuery {
    * @return {boolean} `true` if class is applied to given element, `false` otherwise.
    */
   hasClass(name) {
-    return this.classes.includes(name);
+    var result = true;
+    this.each(function(element) {
+      if (result) {
+        result = element.classList.includes(name);
+      }
+    });
+    return result;
   }
 
   /**
@@ -152,10 +171,10 @@ export class NQuery {
    * @return {NQuery} this object.
    */
   addClass(name) {
-    if (!this.hasClass(name)) {
-      this.classes += name;
-    }
-    return _updateClass();
+    this.each(function(element) {
+      element.classList.add(name);
+    });
+    return this;
   }
 
   /**
@@ -165,37 +184,31 @@ export class NQuery {
    * @return {NQuery} this object.
    */
   removeClass(name) {
-    if (this.hasClass(name)) {
-      this.classes = this.classes.splice(this.classes.indexOf(name), 1);
-      return _updateClass();
-    } else {
-      return this;
-    }
-  }
-
-  /**
-   * Update class name of elements in query with the array stored in
-   * `classes`.
-   *
-   * @private
-   * @return {NQuery} this object.
-   */
-  _updateClass() {
-    return this.each((element) => element.class = this.classes.join("\s"));
+    this.each(function(element) {
+      element.classList.remove(name);
+    });
+    return this;
   }
 }
+
+/**
+ * The plugin interface for NQuery. Add new methods to the NQuery object
+ * with `NQuery.fn.myNewMethod = function(args) { ... }`
+ *
+ * @function NQuery.fn
+ */
+NQuery.fn = NQuery.prototype;
 
 /**
  * Create a new NQuery object using the given selector and scope. If no
  * scope is provided, use the `document` to get the global page scope.
  *
- * @module nquery
  * @function $
  * @param {string} selector - Query to run for selecting elements.
  * @param {HTMLNode} scope - DOM to manipulate. Default: `document`.
  * @return {NQuery} the object created from selector and scope.
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
-export default function(selector, scope = document) {
+function $(selector, scope = document) {
   return new NQuery(scope, selector);
 }
