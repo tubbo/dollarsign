@@ -8,7 +8,16 @@
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
+  <div id="qunit-fixture">
+    <div id="parent">
+      <div id="test1" class="test">
+        <div id="child"></div>
+      </div>
+      <div id="test2" class="test">
+        <div id="child"></div>
+      </div>
+    </div>
+  </div>
   <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
   <script src="../lib/nquery.js"></script>
   <script src="nquery_test.js"></script>

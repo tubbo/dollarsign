@@ -55,4 +55,4 @@ gulp.task('test', function() {
   qunit('test/runner.html');
 });
 
-gulp.task('default', ['clean', 'docs', 'compile', 'compress', 'package']);
+gulp.task('default', ['clean', 'docs', 'compile', 'test', 'compress', 'package']);

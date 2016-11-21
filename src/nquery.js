@@ -11,8 +11,10 @@ class NQuery {
    */
   constructor(scope, selector) {
     this.document = scope;
-    this.selector = options.selector;
+    this.selector = selector;
     this.events = {};
+    this.map = this.elements.map;
+    this.each = this.elements.forEach;
   }
 
   /**
@@ -23,14 +25,14 @@ class NQuery {
   get elements() {
     var nodes = [];
 
-    if (typeof this.document.forEach === 'array') {
+    if (typeof this.document === 'array') {
       this.document.forEach(function(scope) {
-        scope.getElementsBySelector(this.selector).forEach(function(element) {
+        scope.querySelectorAll(this.selector).forEach(function(element) {
           nodes.push(element);
         });
       });
     } else {
-      nodes = this.document.getElementsBySelector(this.selector);
+      nodes = this.document.querySelectorAll(this.selector) || [];
     }
 
     return nodes;
@@ -43,25 +45,21 @@ class NQuery {
   /**
    * Iterate over every element with the given callback function.
    *
+   * @function each
    * @param {function} callback - Function to call on each iteration.
    * @return {NQuery} this object
    */
-  each(callback) {
-    this.elements.forEach(callback);
-    return this;
-  }
 
   /**
    * Iterate over every element with the given callback function and
    * return a new array with the return result of each callback.
    *
+   * @function map
    * @param {function} callback - Function to call on each iteration.
    *                              Each return value becomes part of the Array returned.
    * @return {Array}
    */
-  map(callback) {
-    return this.elements.map(callback);
-  }
+
 
   /**
    * Bind an event to the elements in this selection.
