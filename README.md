@@ -1,15 +1,30 @@
 # nQuery - Native jQuery
 
 A small library for native DOM selection and event binding. Wraps
-basic browser functionality into a more consistent API.
+basic browser functionality into a more consistent API. Supports most of
+jQuery's basic API for event binding, DOM selection, and CSS/attribute
+manipulation.
 
 ## Installation
 
+Install nQuery with NPM:
+
 ```bash
-$ npm install nquery --save
+npm install nquery --save
+```
+
+nQuery is packaged as an ES6 module, so unlike jQuery the `$` function
+is not enabled globally by default. In order to use nQuery, you will
+first need to import `$` (the default exported function) from the
+`'nquery'` module:
+
+```javascript
+import $ from 'nquery';
 ```
 
 ## Usage
+
+Use nQuery to select DOM elements and bind events:
 
 ```javascript
 import $ from 'nquery';
@@ -29,6 +44,9 @@ $('#change-color').on('click', function(event) {
   </nav>
 </body>
 ```
+
+Much of the jQuery API is provided, with some notable exceptions (like
+`$.ajax`).
 
 ## Development
 

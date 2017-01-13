@@ -1,26 +1,37 @@
 /**
+ * nQuery is a native replacement for jQuery for manipulation of the HTML
+ * DOM.
+ *
+ * @module nquery
+ * @author Tom Scott <tubbo@psychedeli.ca>
+ * @version 0.1.0
+ */
+
+/**
  * The NQuery object represents a collection of DOM elements grouped by the given
  * `selector`. Wraps basic browser functionality into a more consistent
  * and concise API.
  *
- * @author Tom Scott <tubbo@psychedeli.ca>
+ * @class
  */
-class NQuery {
+export class NQuery {
   /**
-   * @constructor
+   * Query the given DOM object (or scope) for elements matching selector.
+   *
+   * @param EventTarget scope - DOM object to manipulate
+   * @param String selector - Element query
    */
   constructor(scope, selector) {
     this.document = scope;
     this.selector = selector;
     this.events = {};
-    this.map = this.elements.map;
-    this.each = this.elements.forEach;
   }
 
   /**
    * All elements matching the given `selector`.
    *
-   * @return {Array<HTMLNode>}
+   * @return {Array<Element>}
+   * @readonly
    */
   get elements() {
     var nodes = [];
@@ -38,40 +49,63 @@ class NQuery {
     return nodes;
   }
 
+  /**
+   * Counts results in the query.
+   *
+   * @return {Number} Count of all elements matched by the selector.
+   * @readonly
+   */
   get length() {
     return this.elements.length;
   }
 
   /**
+   * Function executed when iterating over a collection of DOM elements.
+   *
+   * @callback NQuery~elementIterator
+   * @param {NQuery} element - Each element selected from the DOM.
+   * @param {Number} index - Index number of each element in the Array.
+   */
+
+  /**
+   * Function executed when a DOM event is triggered.
+   *
+   * @callback NQuery~eventListener
+   * @param {Event} event - Triggered event object.
+   */
+
+  /**
    * Iterate over every element with the given callback function.
    *
-   * @function each
-   * @param {function} callback - Function to call on each iteration.
+   * @param {elementIterator} callback - Function to call on each iteration.
    * @return {NQuery} this object
    */
+  each(callback) {
+    this.elements.forEach(callback);
+    return this;
+  }
 
   /**
    * Iterate over every element with the given callback function and
    * return a new array with the return result of each callback.
    *
-   * @function map
-   * @param {function} callback - Function to call on each iteration.
-   *                              Each return value becomes part of the Array returned.
+   * @param {elementIterator} callback - Function to call on each iteration.
    * @return {Array}
    */
-
+  map(callback) {
+    return this.elements.map(callback);
+  }
 
   /**
    * Bind an event to the elements in this selection.
    *
    * @param {string} event - Name of the event to be bound.
-   * @param {function} callback - Callback function to be executed when
-   * event fires.
+   * @param {eventListener} listener - Function to be executed when event fires.
    * @return {NQuery} this object
    */
-  on(event, callback) {
-    this.each(element => element.addEventListener(event, callback));
-    this.events[event] = callback;
+  on(event, listener) {
+    this.each(element => element.addEventListener(event, listener));
+    this.events[event] = listener;
     return this;
   }
 
@@ -187,15 +221,22 @@ class NQuery {
     });
     return this;
   }
-}
 
-/**
- * The plugin interface for NQuery. Add new methods to the NQuery object
- * with `NQuery.fn.myNewMethod = function(args) { ... }`
- *
- * @function NQuery.fn
- */
-NQuery.fn = NQuery.prototype;
+  /**
+   * Removes a class if the element(s) have it attached, otherwise adds
+   * class to each element.
+   *
+   * @param {string} name - Class name.
+   * @return {NQuery} this object
+   */
+  toggleClass(name) {
+    if (this.hasClass(name)) {
+      this.removeClass(name);
+    } else {
+      this.addClass(name);
+    }
+  }
+}
 
 /**
  * Create a new NQuery object using the given selector and scope. If no
@@ -203,10 +244,10 @@ NQuery.fn = NQuery.prototype;
  *
  * @function $
  * @param {string} selector - Query to run for selecting elements.
- * @param {HTMLNode} scope - DOM to manipulate. Default: `document`.
+ * @param {EventTarget} scope - DOM to manipulate. Default: `document`.
  * @return {NQuery} the object created from selector and scope.
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
-function $(selector, scope = document) {
+export default function $(selector, scope = document) {
   return new NQuery(scope, selector);
 }
