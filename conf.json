@@ -1,9 +1,0 @@
-{
-  "opts": {
-    "destination": "./docs"
-  },
-  "templates": {
-    "systemName": "nQuery",
-    "includeDate": false
-  }
-}
