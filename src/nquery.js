@@ -68,13 +68,6 @@ export class NQuery {
    */
 
   /**
-   * Function executed when a DOM event is triggered.
-   *
-   * @callback NQuery~eventListener
-   * @param {Event} event - Triggered event object.
-   */
-
-  /**
    * Iterate over every element with the given callback function.
    *
    * @param {elementIterator} callback - Function to call on each iteration.
@@ -95,6 +88,13 @@ export class NQuery {
   map(callback) {
     return this.elements.map(callback);
   }
+
+  /**
+   * Function executed when a DOM event is triggered.
+   *
+   * @callback NQuery~eventListener
+   * @param {Event} event - Triggered event object.
+   */
 
   /**
    * Bind an event to the elements in this selection.
