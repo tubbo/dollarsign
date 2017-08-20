@@ -27,7 +27,6 @@
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "jsdoc": "^3.4.2",
-    "jspm": "^0.16.47",
     "minami": "^1.1.1",
     "node-qunit-phantomjs": "^1.4.0",
     "qunit": "^0.9.1",

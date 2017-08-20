@@ -7,9 +7,7 @@
  * @version 0.1.0
  */
 
-import Dollarsign from 'dollarsign';
-
-export Dollarsign;
+import Dollarsign from './dollarsign';
 
 /**
  * Create a new NQuery object using the given selector and scope. If no
