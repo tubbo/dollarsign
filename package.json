@@ -1,6 +1,6 @@
 {
   "name": "dollarsign",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "DOM selection and manipulation library for native APIs",
   "main": "dollarsign.js",
   "scripts": {
@@ -33,7 +33,9 @@
     "webpack": "^3.3.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
