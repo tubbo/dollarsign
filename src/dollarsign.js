@@ -1,11 +1,11 @@
 /**
- * The NQuery object represents a collection of DOM elements grouped by the given
+ * The Dollarsign object represents a collection of DOM elements grouped by the given
  * `selector`. Wraps basic browser functionality into a more consistent
  * and concise API.
  *
  * @class
  */
-export default class NQuery {
+export default class Dollarsign {
   /**
    * Query the given DOM object (or scope) for elements matching selector.
    *
