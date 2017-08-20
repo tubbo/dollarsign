@@ -1,11 +1,11 @@
 {
   "name": "nquery",
   "version": "1.0.0",
-  "description": "native jquery",
-  "main": "index.js",
+  "description": "DOM selection and manipulation library for native APIs",
+  "main": "nquery.js",
   "scripts": {
-    "test": "ava",
-    "start": "gulp"
+    "test": "node ./test/index.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/tubbo/nquery#readme",
   "devDependencies": {
-    "ava": "^0.17.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
@@ -35,18 +34,7 @@
     "webpack": "^3.3.0"
   },
   "babel": {
-    "presets": [
-      "latest",
-      "env",
-      {
-        "targets": {
-          "browsers": [
-            "IE >= 11",
-            "Last 2 versions"
-          ]
-        }
-      }
-    ]
+    "presets": ["es2015"]
   },
   "eslintConfig": {
     "parser": "babel-eslint",

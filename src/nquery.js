@@ -1,20 +1,11 @@
 /**
- * nQuery is a native replacement for jQuery for manipulation of the HTML
- * DOM.
- *
- * @module nquery
- * @author Tom Scott <tubbo@psychedeli.ca>
- * @version 0.1.0
- */
-
-/**
  * The NQuery object represents a collection of DOM elements grouped by the given
  * `selector`. Wraps basic browser functionality into a more consistent
  * and concise API.
  *
  * @class
  */
-export class NQuery {
+export default class NQuery {
   /**
    * Query the given DOM object (or scope) for elements matching selector.
    *
@@ -187,9 +178,9 @@ export class NQuery {
    * @return {boolean} `true` if class is applied to given element, `false` otherwise.
    */
   hasClass(name) {
-    var result = true;
+    var result = false;
     this.each(function(element) {
-      if (result) {
+      if (!result) {
         result = element.classList.includes(name);
       }
     });
@@ -236,18 +227,4 @@ export class NQuery {
       this.addClass(name);
     }
   }
-}
-
-/**
- * Create a new NQuery object using the given selector and scope. If no
- * scope is provided, use the `document` to get the global page scope.
- *
- * @function $
- * @param {string} selector - Query to run for selecting elements.
- * @param {EventTarget} scope - DOM to manipulate. Default: `document`.
- * @return {NQuery} the object created from selector and scope.
- * @author Tom Scott <tubbo@psychedeli.ca>
- */
-export default function $(selector, scope = document) {
-  return new NQuery(scope, selector);
 }
