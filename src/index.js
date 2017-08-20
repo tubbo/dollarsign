@@ -19,6 +19,6 @@ import Dollarsign from './dollarsign';
  * @return {NQuery} the object created from selector and scope.
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
-export default function $(selector) {
-  return new Dollarsign(selector);
+export default function $(selector, scope = document) {
+  return new Dollarsign(scope, selector);
 }

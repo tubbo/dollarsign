@@ -1,6 +1,6 @@
 {
   "name": "dollarsign",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DOM selection and manipulation library for native APIs",
   "main": "dollarsign.js",
   "scripts": {
