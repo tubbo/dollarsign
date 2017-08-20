@@ -60,18 +60,19 @@ $ cd dollarsign
 Then, install dependencies:
 
 ```bash
-$ npm install
-$ npm install -g gulp-cli # unless you can already run `gulp`
+$ yarn install
 ```
 
-Finally, run the `gulp` command to build and compile NQuery:
+Finally, run `yarn build` to build the `nquery.js` file locally:
 
 ```bash
-$ gulp
+$ yarn build
 ```
 
-You can now access the fully compiled file at **pkg/dollarsign.js**, its
-relative sourcemap at **pkg/dollarsign.map.js**, and a minified version of
-the source at **pkg/dollarsign.min.js**. It will also create a tarball in
-the local repo directory in case you need to export these files
-elsewhere.
+You can now access the fully compiled file at **dollarsign.js**.
+
+To run tests:
+
+```bash
+$ yarn test
+```
