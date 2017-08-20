@@ -1,27 +1,27 @@
 {
-  "name": "nquery",
+  "name": "dollarsign",
   "version": "1.0.0",
   "description": "DOM selection and manipulation library for native APIs",
-  "main": "nquery.js",
+  "main": "dollarsign.js",
   "scripts": {
     "test": "node ./test/index.js",
     "build": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tubbo/nquery.git"
+    "url": "git://github.com/tubbo/dollarsign.git"
   },
   "keywords": [
-    "nquery",
+    "dollarsign",
     "jquery",
     "dom selector"
   ],
   "author": "Tom Scott",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tubbo/nquery/issues"
+    "url": "https://github.com/tubbo/dollarsign/issues"
   },
-  "homepage": "https://github.com/tubbo/nquery#readme",
+  "homepage": "https://github.com/tubbo/dollarsign#readme",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
