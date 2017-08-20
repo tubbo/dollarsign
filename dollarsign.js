@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("dollarsign", [], factory);
+	else if(typeof exports === 'object')
+		exports["dollarsign"] = factory();
+	else
+		root["dollarsign"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -417,3 +427,4 @@ exports.default = Dollarsign;
 
 /***/ })
 /******/ ]);
+});
