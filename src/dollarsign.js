@@ -150,6 +150,14 @@ export default class Dollarsign {
     return this;
   }
 
+  text(content) {
+    return this.attr('innerText', content);
+  }
+
+  html(content) {
+    return this.attr('innerHTML', content);
+  }
+
   /**
    * Return an NQuery object for DOM elements undernerath this selector.
    *
