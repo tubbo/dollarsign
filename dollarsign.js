@@ -102,7 +102,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
 function $(selector) {
-  return new _dollarsign2.default(selector);
+  var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+
+  return new _dollarsign2.default(scope, selector);
 } /**
    * Dollarsign is a native replacement for jQuery for manipulation of the HTML
    * DOM.
@@ -289,6 +291,16 @@ var Dollarsign = function () {
         });
       });
       return this;
+    }
+  }, {
+    key: 'text',
+    value: function text(content) {
+      return this.attr('innerText', content);
+    }
+  }, {
+    key: 'html',
+    value: function html(content) {
+      return this.attr('innerHTML', content);
     }
 
     /**
