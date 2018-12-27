@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,42 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Dollarsign is a native replacement for jQuery for manipulation of the HTML
+ * DOM.
+ *
+ * @module dollarsign
+ * @author Tom Scott &lt;tubbo@psychedeli.ca>
+ * @version 0.1.0
+ */
 
+import Dollarsign from './dollarsign';
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Create a new Dollarsign object using the given selector and scope. If no
+ * scope is provided, use the `document` to get the global page scope.
+ *
+ * @function $
+ * @param {string} selector - Query to run for selecting elements.
+ * @param {EventTarget} scope - DOM to manipulate. Default: `document`.
+ * @return {Dollarsign} the object created from selector and scope.
+ * @author Tom Scott &lt;tubbo@psychedeli.ca>
+ */
+export default function $(selector, scope = document) {
+  return new Dollarsign(scope, selector);
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
