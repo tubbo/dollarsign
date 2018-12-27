@@ -53,8 +53,8 @@ export default class Dollarsign {
   /**
    * Function executed when iterating over a collection of DOM elements.
    *
-   * @callback NQuery~elementIterator
-   * @param {NQuery} element - Each element selected from the DOM.
+   * @callback Dollarsign~elementIterator
+   * @param {Dollarsign} element - Each element selected from the DOM.
    * @param {Number} index - Index number of each element in the Array.
    */
 
@@ -62,7 +62,7 @@ export default class Dollarsign {
    * Iterate over every element with the given callback function.
    *
    * @param {elementIterator} callback - Function to call on each iteration.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   each(callback) {
     this.elements.forEach(callback);
@@ -83,7 +83,7 @@ export default class Dollarsign {
   /**
    * Function executed when a DOM event is triggered.
    *
-   * @callback NQuery~eventListener
+   * @callback Dollarsign~eventListener
    * @param {Event} event - Triggered event object.
    */
 
@@ -92,7 +92,7 @@ export default class Dollarsign {
    *
    * @param {string} event - Name of the event to be bound.
    * @param {eventListener} listener - Function to be executed when event fires.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   on(event, listener) {
     this.each(element => element.addEventListener(event, listener));
@@ -104,7 +104,7 @@ export default class Dollarsign {
    * Unbind an event from the elements in this selection.
    *
    * @param {string} event - Name of the event to be unbound.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   off(event) {
     this.each(element => element.removeEventListener(event));
@@ -116,7 +116,7 @@ export default class Dollarsign {
    * Trigger an event on all elements in this object.
    *
    * @param {string} event - Name of the event to trigger.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   fire(event) {
     return this.each((element) => element.dispatchEvent(event));
@@ -126,7 +126,7 @@ export default class Dollarsign {
    * Alter CSS for all elements in the selection.
    *
    * @param {object} updates - Hash of CSS rules to apply to each element.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   css(updates = {}) {
     Object.keys(updates).forEach(function(rule) {
@@ -141,7 +141,7 @@ export default class Dollarsign {
    * Alter attributes for all elements in the selection.
    *
    * @param {object} updates - Hash of attribute updates to apply to each element.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   attr(updates = {}) {
     Object.keys(updates).forEach(function(attribute) {
@@ -159,24 +159,24 @@ export default class Dollarsign {
   }
 
   /**
-   * Return an NQuery object for DOM elements undernerath this selector.
+   * Return an Dollarsign object for DOM elements undernerath this selector.
    *
    * @param {string} selector - CSS selector to search for.
-   * @return {NQuery} New NQuery object representing selection.
+   * @return {Dollarsign} New Dollarsign object representing selection.
    */
   find(selector) {
-    return new NQuery(this.elements, selector);
+    return new Dollarsign(this.elements, selector);
   }
 
   /**
-   * Return an NQuery object for DOM elements above this selector.
+   * Return an Dollarsign object for DOM elements above this selector.
    *
    * @param {string} selector - CSS Selector to search for.
-   * @return {NQuery} New NQuery object representing selection.
+   * @return {Dollarsign} New Dollarsign object representing selection.
    */
   closest(selector) {
     var parents = this.map((element) => element.parent);
-    return new NQuery(parents, selector);
+    return new Dollarsign(parents, selector);
   }
 
   /**
@@ -199,7 +199,7 @@ export default class Dollarsign {
    * Add class name to elements in query.
    *
    * @param {string} name - Name of the class to add.
-   * @return {NQuery} this object.
+   * @return {Dollarsign} this object.
    */
   addClass(name) {
     this.each(function(element) {
@@ -212,7 +212,7 @@ export default class Dollarsign {
    * Remove class name from elements in query.
    *
    * @param {string} name - Name of the class to remove.
-   * @return {NQuery} this object.
+   * @return {Dollarsign} this object.
    */
   removeClass(name) {
     this.each(function(element) {
@@ -226,7 +226,7 @@ export default class Dollarsign {
    * class to each element.
    *
    * @param {string} name - Class name.
-   * @return {NQuery} this object
+   * @return {Dollarsign} this object
    */
   toggleClass(name) {
     if (this.hasClass(name)) {
