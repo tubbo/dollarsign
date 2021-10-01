@@ -1,7 +1,7 @@
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "dollarsign.js",
+    filename: "dist/dollarsign.js",
     library: "dollarsign",
     libraryTarget: "umd",
     umdNamedDefine: true,

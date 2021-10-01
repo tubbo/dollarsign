@@ -25,11 +25,13 @@ export class Dollarsign {
    * @readonly
    */
   get elements() {
+    if (!this.selector) return [this.document];
+
     let nodes = [];
 
     if (Array.isArray(this.document)) {
       for (const scope of this.document) {
-        nodes = [...nodes, ...scope.querySelectorAll(this.selector)]
+        nodes = [...nodes, ...scope.querySelectorAll(this.selector)];
       }
     } else {
       nodes = this.document.querySelectorAll(this.selector) || [];
@@ -49,6 +51,27 @@ export class Dollarsign {
   }
 
   /**
+   * Configure this class as an "iterator", meaning it can be used in
+   * `for..of` loops and indexed by number.
+   *
+   * @return {string}
+   */
+  *[Symbol.iterator]() {
+    for (const element of this.elements) {
+      yield element;
+    }
+  }
+
+  /**
+   * Class name of this object.
+   *
+   * @return {string}
+   */
+  get [Symbol.toStringTag]() {
+    return "Dollarsign";
+  }
+
+  /**
    * Function executed when iterating over a collection of DOM elements.
    *
    * @callback Dollarsign~elementIterator
@@ -64,7 +87,7 @@ export class Dollarsign {
    */
   each(callback) {
     for (const element of this) {
-      callback(element)
+      callback(element);
     }
 
     return this;
@@ -140,7 +163,7 @@ export class Dollarsign {
       return this.elements[0].style[rule];
     }
 
-    this.each((element) => element.style[rule] = value);
+    this.each((element) => (element.style[rule] = value));
 
     return this;
   }
@@ -164,21 +187,21 @@ export class Dollarsign {
   // TODO: Not working
   text(content) {
     if (content) {
-      this.each((element) => element.innerText = content);
+      this.each((element) => (element.innerText = content));
     }
 
     return this.elements[0].innerText;
   }
 
   /**
-    * Return the inner HTML of the element.
-    *
-    * @param {string} content (optional) - Set the inner HTML.
-    * @return {string}
-    */
+   * Return the inner HTML of the element.
+   *
+   * @param {string} content (optional) - Set the inner HTML.
+   * @return {string}
+   */
   html(content) {
     if (content) {
-      this.each((element) => element.innerHTML = content);
+      this.each((element) => (element.innerHTML = content));
     }
 
     return this.elements[0].innerHTML;
@@ -215,12 +238,14 @@ export class Dollarsign {
    * @return {boolean} `true` if class is applied to given element, `false` otherwise.
    */
   hasClass(name) {
-    var result = false;
+    let result = false;
+
     this.each(function (element) {
       if (!result) {
         result = element.classList.contains(name);
       }
     });
+
     return result;
   }
 
@@ -247,6 +272,7 @@ export class Dollarsign {
     this.each(function (element) {
       element.classList.remove(name);
     });
+
     return this;
   }
 
@@ -263,25 +289,7 @@ export class Dollarsign {
     } else {
       this.addClass(name);
     }
-  }
 
-  /**
-    * Iterate over this object like you would an array.
-    *
-    * @return {string}
-    */
-  * [Symbol.iterator]() {
-    for (const element of this.elements) {
-      yield element
-    }
-  }
-
-  /**
-    * Class name of this object.
-    *
-    * @return {string}
-    */
-  get [Symbol.toStringTag]() {
-    return 'Dollarsign';
+    return this;
   }
 }
