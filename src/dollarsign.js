@@ -25,14 +25,12 @@ export class Dollarsign {
    * @readonly
    */
   get elements() {
-    var nodes = [];
+    let nodes = [];
 
-    if (typeof this.document === "array") {
-      this.document.forEach(function (scope) {
-        scope.querySelectorAll(this.selector).forEach(function (element) {
-          nodes.push(element);
-        });
-      });
+    if (Array.isArray(this.document)) {
+      for (const scope of this.document) {
+        nodes = [...nodes, ...scope.querySelectorAll(this.selector)]
+      }
     } else {
       nodes = this.document.querySelectorAll(this.selector) || [];
     }
@@ -65,7 +63,10 @@ export class Dollarsign {
    * @return {Dollarsign} this object
    */
   each(callback) {
-    this.elements.forEach(callback);
+    for (const element of this) {
+      callback(element)
+    }
+
     return this;
   }
 
@@ -107,8 +108,12 @@ export class Dollarsign {
    * @return {Dollarsign} this object
    */
   off(event) {
-    this.each((element) => element.removeEventListener(event));
-    this.events.delete(event);
+    const handler = this.events[event];
+
+    this.each((element) => element.removeEventListener(event, handler));
+
+    delete this.events[event];
+
     return this;
   }
 
@@ -118,7 +123,9 @@ export class Dollarsign {
    * @param {string} event - Name of the event to trigger.
    * @return {Dollarsign} this object
    */
-  fire(event) {
+  fire(name) {
+    const event = new CustomEvent(name);
+
     return this.each((element) => element.dispatchEvent(event));
   }
 
@@ -128,12 +135,13 @@ export class Dollarsign {
    * @param {object} updates - Hash of CSS rules to apply to each element.
    * @return {Dollarsign} this object
    */
-  css(updates = {}) {
-    Object.keys(updates).forEach(function (rule) {
-      this.each(function (element) {
-        element.style[rule] = updates[rule];
-      });
-    });
+  css(rule, value) {
+    if (rule && typeof value === "undefined") {
+      return this.elements[0].style[rule];
+    }
+
+    this.each((element) => element.style[rule] = value);
+
     return this;
   }
 
@@ -143,19 +151,37 @@ export class Dollarsign {
    * @param {object} updates - Hash of attribute updates to apply to each element.
    * @return {Dollarsign} this object
    */
-  attr(updates = {}) {
-    Object.keys(updates).forEach(function (attribute) {
-      this.each((element) => (element[attribute] = value));
-    });
+  attr(name, value) {
+    if (name && typeof value === "undefined") {
+      return this.elements[0].getAttribute(name);
+    }
+
+    this.each((element) => element.setAttribute(name, value));
+
     return this;
   }
 
+  // TODO: Not working
   text(content) {
-    return this.attr("innerText", content);
+    if (content) {
+      this.each((element) => element.innerText = content);
+    }
+
+    return this.elements[0].innerText;
   }
 
+  /**
+    * Return the inner HTML of the element.
+    *
+    * @param {string} content (optional) - Set the inner HTML.
+    * @return {string}
+    */
   html(content) {
-    return this.attr("innerHTML", content);
+    if (content) {
+      this.each((element) => element.innerHTML = content);
+    }
+
+    return this.elements[0].innerHTML;
   }
 
   /**
@@ -165,7 +191,9 @@ export class Dollarsign {
    * @return {Dollarsign} New Dollarsign object representing selection.
    */
   find(selector) {
-    return new Dollarsign(this.elements, selector);
+    const scope = this.elements[0];
+
+    return new Dollarsign(scope, selector);
   }
 
   /**
@@ -175,8 +203,9 @@ export class Dollarsign {
    * @return {Dollarsign} New Dollarsign object representing selection.
    */
   closest(selector) {
-    var parents = this.map((element) => element.parent);
-    return new Dollarsign(parents, selector);
+    const scope = this.elements[0].parentElement.parentElement;
+
+    return new Dollarsign(scope, selector);
   }
 
   /**
@@ -189,7 +218,7 @@ export class Dollarsign {
     var result = false;
     this.each(function (element) {
       if (!result) {
-        result = element.classList.includes(name);
+        result = element.classList.contains(name);
       }
     });
     return result;
@@ -234,5 +263,25 @@ export class Dollarsign {
     } else {
       this.addClass(name);
     }
+  }
+
+  /**
+    * Iterate over this object like you would an array.
+    *
+    * @return {string}
+    */
+  * [Symbol.iterator]() {
+    for (const element of this.elements) {
+      yield element
+    }
+  }
+
+  /**
+    * Class name of this object.
+    *
+    * @return {string}
+    */
+  get [Symbol.toStringTag]() {
+    return 'Dollarsign';
   }
 }

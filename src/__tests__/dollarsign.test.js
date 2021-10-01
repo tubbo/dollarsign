@@ -2,7 +2,9 @@ import $ from "../";
 
 describe("Dollarsign", () => {
   beforeEach(() => {
-    document.write(`<div id="test" /><div class="test" /><div class="test" />`);
+    document.write(
+      `<div id="test" /></div><div class="test" /><div class="test" /><div id="parent"><div id="child" /></div><div id="html"><strong>foo</strong></div><div id="text">foo</div>`
+    );
   });
 
   test("elements", () => {
@@ -18,7 +20,7 @@ describe("Dollarsign", () => {
 
     $(".test").each(iterator);
 
-    expect(iterator).toHaveBeenCalledOnce();
+    expect(iterator).toHaveBeenCalled();
   });
 
   test("events", () => {
@@ -29,25 +31,29 @@ describe("Dollarsign", () => {
 
     expect(element.events.click).toEqual(handler);
 
+    element.fire("click");
+
+    expect(handler).toHaveBeenCalled();
+
     element.off("click", handler);
 
     expect(element.events.click).not.toBeDefined();
-
-    element.fire("click");
-
-    expect(handler).toHaveBeenCalledOnce();
   });
 
   test("css", () => {
-    $(".test").css("color", "#ff0000");
+    const element = $(".test");
 
-    expect($("#test").css("color")).toEqual("#ff0000");
+    element.css("color", "#ff0000");
+
+    expect(element.css("color")).toEqual("rgb(255, 0, 0)");
   });
 
   test("attr", () => {
-    $(".test").attr("foo", "bar");
+    const element = $(".test");
 
-    expect($("#test").attr("foo")).toEqual("bar");
+    element.attr("foo", "bar");
+
+    expect(element.attr("foo")).toEqual("bar");
   });
 
   test("classes", () => {
@@ -60,5 +66,17 @@ describe("Dollarsign", () => {
     $(".test").removeClass("foo");
 
     expect($(".test").hasClass("foo")).toBe(false);
+  });
+
+  test("content", () => {
+    expect($("#html").html()).toEqual("<strong>foo</strong>");
+  });
+
+  test("traversal", () => {
+    const parent = $("#parent");
+    const child = $("#child");
+
+    expect(parent.find("#child").attr("id")).toEqual("child");
+    expect(child.closest("#parent").attr("id")).toEqual("parent");
   });
 });
