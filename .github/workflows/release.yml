@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - package.json
+      - yarn.lock
+      - CHANGELOG.md
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,3 +32,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: git push origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
