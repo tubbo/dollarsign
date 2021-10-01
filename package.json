@@ -6,8 +6,14 @@
   "scripts": {
     "test": "node ./test/index.js",
     "build": "webpack",
-    "docs": "jsdoc src -d docs"
+    "docs": "jsdoc src -d docs",
+    "clean": "rm -rf dollarsign.js"
   },
+  "files": [
+    "dollarsign.js",
+    "package.json",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/tubbo/dollarsign.git"
