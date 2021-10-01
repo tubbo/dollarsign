@@ -25,3 +25,6 @@ jobs:
       - run: yarn build
       - run: yarn docs
       - run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

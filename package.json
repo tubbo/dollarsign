@@ -11,7 +11,8 @@
     "clean": "rm -rf dollarsign.js",
     "check": "prettier --check .",
     "lint": "eslint .",
-    "fmt": "prettier --write . && eslint --fix ."
+    "fmt": "prettier --write . && eslint --fix .",
+    "release": "semantic-release"
   },
   "files": [
     "dollarsign.js",
@@ -20,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tubbo/dollarsign.git"
+    "url": "https://github.com/tubbo/dollarsign.git"
   },
   "keywords": [
     "dollarsign",
@@ -35,6 +36,7 @@
   "homepage": "https://github.com/tubbo/dollarsign#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
+    "@semantic-release/changelog": "^6.0.0",
     "@testing-library/dom": "^8.7.1",
     "@testing-library/jest-dom": "^5.14.1",
     "babel-core": "^6.25.0",
@@ -52,6 +54,7 @@
     "node-qunit-phantomjs": "^1.4.0",
     "prettier": "^2.4.1",
     "qunit": "^0.9.1",
+    "semantic-release": "^18.0.0",
     "webpack": "^3.3.0"
   }
 }

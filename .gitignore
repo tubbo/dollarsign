@@ -4,3 +4,4 @@ pkg
 **/*.tar.gz
 dollarsign.js
 .yarn/cache
+.env
