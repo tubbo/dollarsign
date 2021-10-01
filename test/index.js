@@ -1,3 +1,3 @@
-var qunit = require('node-qunit-phantomjs');
+var qunit = require("node-qunit-phantomjs");
 
-qunit('./test/index.html');
+qunit("./test/index.html");

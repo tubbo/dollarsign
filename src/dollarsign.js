@@ -27,9 +27,9 @@ export default class Dollarsign {
   get elements() {
     var nodes = [];
 
-    if (typeof this.document === 'array') {
-      this.document.forEach(function(scope) {
-        scope.querySelectorAll(this.selector).forEach(function(element) {
+    if (typeof this.document === "array") {
+      this.document.forEach(function (scope) {
+        scope.querySelectorAll(this.selector).forEach(function (element) {
           nodes.push(element);
         });
       });
@@ -95,7 +95,7 @@ export default class Dollarsign {
    * @return {Dollarsign} this object
    */
   on(event, listener) {
-    this.each(element => element.addEventListener(event, listener));
+    this.each((element) => element.addEventListener(event, listener));
     this.events[event] = listener;
     return this;
   }
@@ -107,7 +107,7 @@ export default class Dollarsign {
    * @return {Dollarsign} this object
    */
   off(event) {
-    this.each(element => element.removeEventListener(event));
+    this.each((element) => element.removeEventListener(event));
     this.events.delete(event);
     return this;
   }
@@ -129,8 +129,8 @@ export default class Dollarsign {
    * @return {Dollarsign} this object
    */
   css(updates = {}) {
-    Object.keys(updates).forEach(function(rule) {
-      this.each(function(element) {
+    Object.keys(updates).forEach(function (rule) {
+      this.each(function (element) {
         element.style[rule] = updates[rule];
       });
     });
@@ -144,18 +144,18 @@ export default class Dollarsign {
    * @return {Dollarsign} this object
    */
   attr(updates = {}) {
-    Object.keys(updates).forEach(function(attribute) {
-      this.each(element => element[attribute] = value);
+    Object.keys(updates).forEach(function (attribute) {
+      this.each((element) => (element[attribute] = value));
     });
     return this;
   }
 
   text(content) {
-    return this.attr('innerText', content);
+    return this.attr("innerText", content);
   }
 
   html(content) {
-    return this.attr('innerHTML', content);
+    return this.attr("innerHTML", content);
   }
 
   /**
@@ -187,7 +187,7 @@ export default class Dollarsign {
    */
   hasClass(name) {
     var result = false;
-    this.each(function(element) {
+    this.each(function (element) {
       if (!result) {
         result = element.classList.includes(name);
       }
@@ -202,7 +202,7 @@ export default class Dollarsign {
    * @return {Dollarsign} this object.
    */
   addClass(name) {
-    this.each(function(element) {
+    this.each(function (element) {
       element.classList.add(name);
     });
     return this;
@@ -215,7 +215,7 @@ export default class Dollarsign {
    * @return {Dollarsign} this object.
    */
   removeClass(name) {
-    this.each(function(element) {
+    this.each(function (element) {
       element.classList.remove(name);
     });
     return this;

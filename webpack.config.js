@@ -1,20 +1,20 @@
-var path = require('path');
+var path = require("path");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'dollarsign.js',
-    library: 'dollarsign',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    filename: "dollarsign.js",
+    library: "dollarsign",
+    libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: "babel-loader",
+      },
+    ],
+  },
 };

@@ -7,7 +7,7 @@
  * @version 0.1.0
  */
 
-import Dollarsign from './dollarsign';
+import Dollarsign from "./dollarsign";
 
 /**
  * Create a new Dollarsign object using the given selector and scope. If no

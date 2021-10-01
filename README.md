@@ -19,7 +19,7 @@ first need to import `$` (the default exported function) from the
 `'dollarsign'` module:
 
 ```javascript
-import $ from 'dollarsign';
+import $ from "dollarsign";
 ```
 
 ## Usage
@@ -27,11 +27,11 @@ import $ from 'dollarsign';
 Use Dollarsign to select DOM elements and bind events:
 
 ```javascript
-import $ from 'dollarsign';
+import $ from "dollarsign";
 
-$('#change-color').on('click', function(event) {
+$("#change-color").on("click", function (event) {
   event.preventDefault();
-  $('h1').css({ color: '#ff000' });
+  $("h1").css({ color: "#ff000" });
 });
 ```
 
