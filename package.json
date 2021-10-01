@@ -7,7 +7,10 @@
     "test": "node ./test/index.js",
     "build": "webpack",
     "docs": "jsdoc src -d docs",
-    "clean": "rm -rf dollarsign.js"
+    "clean": "rm -rf dollarsign.js",
+    "check": "prettier --check .",
+    "lint": "eslint .",
+    "fmt": "prettier --write . && eslint --fix ."
   },
   "files": [
     "dollarsign.js",
@@ -38,31 +41,8 @@
     "jsdoc": "^3.4.2",
     "minami": "^1.1.1",
     "node-qunit-phantomjs": "^1.4.0",
+    "prettier": "^2.4.1",
     "qunit": "^0.9.1",
     "webpack": "^3.3.0"
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "rules": {
-      "eol-last": [
-        0
-      ],
-      "no-mixed-requires": [
-        0
-      ],
-      "no-underscore-dangle": [
-        0
-      ],
-      "quotes": [
-        2,
-        "single"
-      ],
-      "strict": 0
-    }
   }
 }

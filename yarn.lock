@@ -1581,6 +1581,7 @@ __metadata:
     jsdoc: ^3.4.2
     minami: ^1.1.1
     node-qunit-phantomjs: ^1.4.0
+    prettier: ^2.4.1
     qunit: ^0.9.1
     webpack: ^3.3.0
   languageName: unknown
@@ -3882,6 +3883,15 @@ fsevents@^1.0.0:
   version: 0.2.0
   resolution: "preserve@npm:0.2.0"
   checksum: dd31d4fd0e6b218cac7178712ae0683c96e6eaa3e5490a37aba6d47095f87c47ffe980a3061ebe72ca07cb2a9a4f1a41bbeecee8944ec77be311c294e05b2e43
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "prettier@npm:2.4.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: cc6830588b401b0d742862fe9c46bc9118204fb307c3abe0e49e95b35ed23629573807ffdf9cdd65289c252a0bb51fc0171437f6626ee36378dea80f0ee80b91
   languageName: node
   linkType: hard
 
