@@ -20,7 +20,7 @@ jobs:
         with:
           path: node_modules
           key: ${{ hashFiles('yarn.lock') }}
-      - run: yarn install
+      - run: yarn install --check-cache
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn lint
       - run: yarn check
@@ -40,6 +40,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ hashFiles('yarn.lock') }}
-      - run: yarn install
+      - run: yarn install --check-cache
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn test --ci

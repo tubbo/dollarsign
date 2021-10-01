@@ -3,3 +3,4 @@ pkg
 **/*.DS_Store
 **/*.tar.gz
 dollarsign.js
+.yarn/cache
