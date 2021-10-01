@@ -5,7 +5,7 @@
  *
  * @class
  */
-export default class Dollarsign {
+export class Dollarsign {
   /**
    * Query the given DOM object (or scope) for elements matching selector.
    *
