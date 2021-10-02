@@ -7,29 +7,38 @@ on:
       - package.json
       - yarn.lock
       - CHANGELOG.md
+      - .github/workflows/*
 jobs:
-  release:
+  publish:
+    name: Publish NPM Package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - id: metadata
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      - name: Generate Metadata
+        id: metadata
         run: |-
           echo "##[set-output name=node-version;]$(cat .node-version)"
-      - uses: actions/setup-node@v2
+      - name: Install NodeJS
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ steps.metadata.outputs.node-version }}
           cache: yarn
-      - id: cache
+      - name: Cache Dependencies
+        id: cache
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ hashFiles('yarn.lock') }}
-      - run: yarn install
+      - name: Install Dependencies
+        run: yarn install
         if: steps.cache.outputs.cache-hit != 'true'
-      - run: yarn release
+      - name: Generate Release
+        run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push origin master
+      - name: Push Changelog to Convergence Branch
+        run: git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}

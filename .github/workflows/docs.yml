@@ -8,7 +8,7 @@ jobs:
     name: Generate Documentation
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Source Code
         uses: actions/checkout@v2
       - name: Generate JSDoc
         uses: andstor/jsdoc-action@v1
@@ -18,7 +18,7 @@ jobs:
           template: minami
           front_page: README.md
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          deploy_key: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
-          publish_dir: ./docs
+          branch: gh-pages
+          folder: docs
