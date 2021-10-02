@@ -87,7 +87,10 @@ export class Dollarsign {
    */
   each(callback) {
     for (const element of this) {
-      callback(element);
+      const item = $(element);
+      const iterate = callback.bind(item);
+
+      iterate(element);
     }
 
     return this;

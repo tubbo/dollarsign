@@ -1,6 +1,6 @@
 import { $ } from "../factory";
 
-describe("Dollarsign", () => {
+describe("core functionality", () => {
   beforeEach(() => {
     document.write(`<div id="test" />`);
   });
