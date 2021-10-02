@@ -6,3 +6,4 @@ dollarsign.js
 .yarn/cache
 .env
 docs
+coverage
