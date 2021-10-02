@@ -1,3 +1,7 @@
+/**
+  * @module dom
+  */
+
 import { Dollarsign } from "./dollarsign";
 
 /**

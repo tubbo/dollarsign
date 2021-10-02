@@ -35,6 +35,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.2.4",
+    "cross-fetch": "^3.1.4",
     "eslint": "^7.32.0",
     "eslint-plugin-jest": "^24.5.0",
     "eslint-plugin-jest-dom": "^3.9.2",
@@ -49,7 +50,8 @@
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "jest-extended",
-      "regenerator-runtime/runtime"
+      "regenerator-runtime/runtime",
+      "cross-fetch/polyfill"
     ]
   }
 }

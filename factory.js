@@ -12,7 +12,6 @@ import { Dollarsign } from "./dollarsign";
  */
 export function $(selector, scope = document) {
   return new Dollarsign(scope, selector);
-
 }
 
 $.fn = {};

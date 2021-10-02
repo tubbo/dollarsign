@@ -1,4 +1,8 @@
 /**
+ * @module events
+ */
+
+/**
  * Function executed when a DOM event is triggered.
  *
  * @callback Dollarsign~eventListener

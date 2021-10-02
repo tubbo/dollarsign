@@ -29,12 +29,6 @@ describe("Dollarsign", () => {
     expect(iterator).toHaveBeenCalled();
   });
 
-  test("plugins", () => {
-    $.fn.foo = () => "bar";
-
-    expect($("#test").foo()).toEqual("bar");
-  });
-
   test("toString", () => {
     expect($("#test").toString()).toEqual("[object Dollarsign]");
   });

@@ -79,6 +79,38 @@ $("#element").plugin();
 $("#element").hasClass("plugined"); // => true
 ```
 
+### Roll Your Own
+
+The plugin system is not only used for 3rd-party plugins, it's also how
+Dollarsign implements most of its functionality. This means you can
+leverage the relatively small size of Dollarsign's core functionality
+and "roll your own" build of the library, using tree-shaking and
+compile-time optimizations to get the smallest possible bundle size with
+the least amount of work.
+
+To roll your own build of Dollarsign, import `$` from the _factory_
+module rather than the default:
+
+```javascript
+import { $ } from "dollarsign/factory";
+```
+
+This gives you a "blank slate" Dollarsign object. You can still query
+for elements, but there's not much you can do with them. You'll need to
+import some functionality and apply them as plugins. For example, if you
+only wanted the event binding functionality, you might do:
+
+```javascript
+import { $ } from "dollarsign/factory";
+import { on, off, fire } from "dollarsign/events";
+
+$.fn.on = on;
+$.fn.off = off;
+$.fn.fire = fire;
+
+export default $;
+```
+
 ### API Documentation
 
 For more information about what API methods are implemented, visit the

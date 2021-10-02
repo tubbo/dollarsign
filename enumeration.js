@@ -1,3 +1,7 @@
+/**
+  * @module enumeration
+  */
+
 /*
  * Iterate over every element with the given callback function and
  * return a new array with the return result of each callback.

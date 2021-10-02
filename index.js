@@ -1,16 +1,9 @@
-/**
- * Dollarsign is a native replacement for jQuery for manipulation of the HTML
- * DOM.
- *
- * @module dollarsign
- * @author Tom Scott <tubbo@psychedeli.ca>
- * @version 0.1.0
- */
 import { $ } from "./factory";
 import { css, addClass, removeClass, toggleClass, hasClass } from "./css";
 import { html, text, attr, find, closest } from "./dom";
 import { map, reduce } from "./enumeration";
 import { on, off, fire } from "./events";
+import { load } from "./ajax";
 
 export * from "./dollarsign";
 
@@ -29,5 +22,6 @@ $.fn.find = find;
 $.fn.closest = closest;
 $.fn.map = map;
 $.fn.reduce = reduce;
+$.fn.load = load;
 
 export default $;

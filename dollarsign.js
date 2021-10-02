@@ -5,7 +5,7 @@ import { $ } from "./factory";
  * `selector`. Wraps basic browser functionality into a more consistent
  * and concise API. The implementation of this class contains only the
  * bare minimum necessary to implement all of Dollarsign's
- * functionality, and the rest of it is implemented in plugins.
+ * functionality, and the rest of it is implemented in various modules.
  *
  * @class
  */

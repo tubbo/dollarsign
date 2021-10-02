@@ -1,4 +1,8 @@
 /**
+ * @module css
+ */
+
+/**
  * Alter CSS for all elements in the selection.
  *
  * @param {object} updates - Hash of CSS rules to apply to each element.
