@@ -2,7 +2,6 @@ node_modules
 pkg
 **/*.DS_Store
 **/*.tar.gz
-dollarsign.js
 .yarn/cache
 .env
 docs
