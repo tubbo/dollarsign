@@ -1,21 +1,12 @@
-import $ from "../";
+import { $ } from "../factory";
 
 describe("Dollarsign", () => {
   beforeEach(() => {
-    document.write(
-      `
-        <div id="test" />
-        <div class="test" />
-        <div class="test" />
-        <div id="parent">
-          <div id="child" />
-        </div>
-        <p id="html">
-          <strong>foo</strong>
-        </p>
-        <p id="text">foo</p>
-      `
-    );
+    document.write(`<div id="test" />`);
+  });
+
+  afterEach(() => {
+    document.write("");
   });
 
   test("elements", () => {
@@ -23,10 +14,14 @@ describe("Dollarsign", () => {
   });
 
   test("length", () => {
+    document.write(`<div class="test" /><div class="test" />`);
+
     expect($(".test")).toHaveLength(2);
   });
 
   test("each", () => {
+    document.write(`<div class="test" /><div class="test" />`);
+
     const iterator = jest.fn();
 
     $(".test").each(iterator);
@@ -34,66 +29,13 @@ describe("Dollarsign", () => {
     expect(iterator).toHaveBeenCalled();
   });
 
-  test("events", () => {
-    const handler = jest.fn();
-    const element = $(".test");
-
-    element.on("click", handler);
-
-    expect(element.events.click).toEqual(handler);
-
-    element.fire("click");
-
-    expect(handler).toHaveBeenCalled();
-
-    element.off("click", handler);
-
-    expect(element.events.click).not.toBeDefined();
-  });
-
-  test("css", () => {
-    const element = $(".test");
-
-    element.css("color", "#ff0000");
-
-    expect(element.css("color")).toEqual("rgb(255, 0, 0)");
-  });
-
-  test("attr", () => {
-    const element = $(".test");
-
-    element.attr("foo", "bar");
-
-    expect(element.attr("foo")).toEqual("bar");
-  });
-
-  test("classes", () => {
-    expect($(".test").hasClass("test")).toBe(true);
-
-    $(".test").addClass("foo");
-
-    expect($(".test").hasClass("foo")).toBe(true);
-
-    $(".test").removeClass("foo");
-
-    expect($(".test").hasClass("foo")).toBe(false);
-  });
-
-  test("content", () => {
-    expect($("#html").html()).toMatch("<strong>foo</strong>");
-  });
-
-  test("traversal", () => {
-    const parent = $("#parent");
-    const child = $("#child");
-
-    expect(parent.find("#child").attr("id")).toEqual("child");
-    expect(child.closest("#parent").attr("id")).toEqual("parent");
-  });
-
   test("plugins", () => {
     $.fn.foo = () => "bar";
 
     expect($("#test").foo()).toEqual("bar");
+  });
+
+  test("toString", () => {
+    expect($("#test").toString()).toEqual("[object Dollarsign]");
   });
 });
