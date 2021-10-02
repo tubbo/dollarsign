@@ -7,6 +7,10 @@ import { load } from "./ajax";
 
 export * from "./dollarsign";
 
+/**
+ * The default build of Dollarsign includes all of its core
+ * functionality and is meant for the majority of use cases.
+ */
 $.fn.on = on;
 $.fn.off = off;
 $.fn.fire = fire;

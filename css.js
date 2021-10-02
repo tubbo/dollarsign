@@ -1,4 +1,7 @@
 /**
+ * The `css` module contains all functionality related to styling
+ * elements and applying classes.
+ *
  * @module css
  */
 
@@ -13,9 +16,9 @@ export function css(rule, value) {
     return this.elements[0].style[rule];
   }
 
-  this.each((element) => (element.style[rule] = value));
-
-  return this;
+  return this.each((element) => {
+    element.style[rule] = value;
+  });
 }
 
 /**
@@ -43,10 +46,9 @@ export function hasClass(name) {
  * @return {Dollarsign} this object.
  */
 export function addClass(name) {
-  this.each(function (element) {
+  return this.each((element) => {
     element.classList.add(name);
   });
-  return this;
 }
 
 /**
@@ -56,11 +58,9 @@ export function addClass(name) {
  * @return {Dollarsign} this object.
  */
 export function removeClass(name) {
-  this.each(function (element) {
+  return this.each((element) => {
     element.classList.remove(name);
   });
-
-  return this;
 }
 
 /**
@@ -72,10 +72,8 @@ export function removeClass(name) {
  */
 export function toggleClass(name) {
   if (this.hasClass(name)) {
-    this.removeClass(name);
+    return this.removeClass(name);
   } else {
-    this.addClass(name);
+    return this.addClass(name);
   }
-
-  return this;
 }

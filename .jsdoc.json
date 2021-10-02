@@ -3,7 +3,7 @@
   "opts": {
     "template": "node_modules/minami",
     "destination": "./docs",
-    "private": true
+    "access": "all"
   },
   "source": {
     "include": [".", "README.md"],

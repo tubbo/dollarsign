@@ -79,6 +79,22 @@ $("#element").plugin();
 $("#element").hasClass("plugined"); // => true
 ```
 
+#### Testing Plugins
+
+You can test your plugins in isolation by using a stripped-down build.
+Here's an example written in Jest:
+
+```javascript
+import { foo } from "./foo";
+import { $ } from "dollarsign/factory";
+
+$.fn.foo = foo;
+
+test("foo", () => {
+  expect($(document).foo()).toEqual("bar");
+});
+```
+
 ### Roll Your Own
 
 The plugin system is not only used for 3rd-party plugins, it's also how
@@ -109,6 +125,19 @@ $.fn.off = off;
 $.fn.fire = fire;
 
 export default $;
+```
+
+Note that some parts of the standard set of plugins are dependent on one
+another. For example, to use `load()`, you will need to also include the
+following plugins (or at least reasonable facsimiles of them):
+
+```javascript
+import { $ } from "dollarsign";
+import { load } from "dollarsign/ajax";
+import { html } from "dollarsign/dom";
+
+$.fn.html = html;
+$.fn.load = load;
 ```
 
 ### API Documentation

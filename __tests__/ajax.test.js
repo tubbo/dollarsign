@@ -1,10 +1,15 @@
 import { $ } from "../factory";
 import { load, serialize } from "../ajax";
+import { find, html } from "../dom";
+import { reduce } from "../enumeration";
 
 describe("ajax", () => {
   beforeEach(() => {
     $.fn.load = load;
     $.fn.serialize = serialize;
+    $.fn.find = find;
+    $.fn.html = html;
+    $.fn.reduce = reduce;
   });
 
   afterEach(() => {

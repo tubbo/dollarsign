@@ -1,4 +1,7 @@
 /**
+ * The `dom` module includes functionality for DOM traversal and
+ * manipulation.
+ *
  * @module dom
  */
 

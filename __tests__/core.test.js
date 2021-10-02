@@ -10,7 +10,10 @@ describe("core functionality", () => {
   });
 
   test("elements", () => {
-    expect($("#test").elements).toHaveLength(1);
+    const $test = $("#test");
+
+    expect($test.elements).toHaveLength(1);
+    expect($test[0]).toEqual($test.elements[0]);
   });
 
   test("length", () => {

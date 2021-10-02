@@ -1,10 +1,8 @@
 /**
+ * This module wraps the `fetch` API and handles any kind of HTTP
+ * interaction, including serialization of form parameters.
  * @module ajax
  */
-
-import { $ } from "./factory";
-import { html, find } from "./dom";
-import { reduce } from "./enumeration";
 
 /**
  * Load the contents of an external URL into the elements matched by
@@ -14,29 +12,32 @@ import { reduce } from "./enumeration";
  * @param {string} url - URL to load into this element as HTML.
  * @param {string} body - (optional) POST body to send along with the URL.
  * @return {Dollarsign} this object
+ * @async
  */
 export async function load(url, body) {
   const method = body ? "POST" : "GET";
   const response = await fetch(url, { method, body });
   const content = await response.text();
 
-  $.fn.html = html;
-
-  return this.each((element) => $(element).html(content));
+  return this.each(function () {
+    this.html(content);
+  });
 }
 
+/**
+ * Convert the values of form controls into URL-encoded params that can
+ * be sent along the wire.
+ *
+ * @return {string} URL-encoded params matching the values of each
+ * input.
+ */
 export function serialize() {
-  $.fn.find = find;
-  $.fn.reduce = reduce;
-
   const params = new URLSearchParams(
-    $(this)
-      .find("input")
-      .reduce((element, accumulator) => {
-        accumulator[element.name] = element.value;
+    this.find("input").reduce((element, accumulator) => {
+      accumulator[element.name] = element.value;
 
-        return accumulator;
-      }, {})
+      return accumulator;
+    }, {})
   );
 
   return params.toString();

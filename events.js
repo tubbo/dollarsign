@@ -1,4 +1,8 @@
 /**
+ * The `events` module contains all functionality for DOM event binding
+ * and triggering events. This will also contain the logic for custom
+ * Dollarsign-only events and event delegation.
+ *
  * @module events
  */
 

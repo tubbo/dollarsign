@@ -1,4 +1,7 @@
 /**
+  * This module contains utility functions for iterating over elements,
+  * such as `map` and `reduce`.
+  *
   * @module enumeration
   */
 

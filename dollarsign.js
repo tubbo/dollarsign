@@ -13,6 +13,7 @@ export class Dollarsign {
   /**
    * Query the given DOM object (or scope) for elements matching selector.
    *
+   * @constructor
    * @param {Element | Document} scope - DOM object to manipulate
    * @param {string} selector - Element query
    */
@@ -26,6 +27,37 @@ export class Dollarsign {
 
       this[name] = plugin.bind(this);
     }
+
+    return new Proxy(this, {
+      get: (target, propKey, receiver) => {
+        if (typeof propKey === "string" && this.#isSafeArrayIndex(propKey)) {
+          return Reflect.get(this.elements, propKey);
+        }
+        return Reflect.get(target, propKey, receiver);
+      },
+      set: (target, propKey, value, receiver) => {
+        if (typeof propKey === "string" && this.#isSafeArrayIndex(propKey)) {
+          return Reflect.set(this.elements, propKey, value);
+        }
+        return Reflect.set(target, propKey, value, receiver);
+      },
+    });
+  }
+
+  /**
+   * Test whether the given key that we are trying to resolve can be
+   * used as an Array index. This is for internal use only, and allows
+   * for Array-like behavior such as responding to `$('.selector')[0]`.
+   *
+   * @param {string | number} propKey
+   * @return {boolean}
+   * @private
+   */
+  #isSafeArrayIndex(propKey) {
+    const uint = Number.parseInt(propKey, 10);
+    const s = uint + "";
+
+    return propKey === s && uint !== 0xffffffff && uint < this.length;
   }
 
   /**
@@ -56,9 +88,16 @@ export class Dollarsign {
   }
 
   /**
-   * Configure this class as an "iterator", meaning it can be used in
-   * `for..of` loops. This is what's used under the hood by `each()` to
-   * iterate over every element.
+   * Allow iteration over this object using `for..of` loops. This is
+   * also used to iterate over objects with `this.each()`, but with
+   * that function we provide a bit more functionality. This will only
+   * iterate over the elements and not change the `this` or wrap each
+   * element in a Dollarsign object.
+   * @name iterator
+   * @function
+   * @memberof Dollarsign
+   * @instance
+   * @generator
    */
   *[Symbol.iterator]() {
     for (const element of this.elements) {
@@ -67,10 +106,14 @@ export class Dollarsign {
   }
 
   /**
-   * Class name of this object. Identifies Dollarsign objects so that we
-   * can detect them in the factory function and act accordingly.
+   * This allows us to identify Dollarsign objects without needing to
+   * use `instanceof`. In bundled environments, `instanceof` doesn't
+   * work because the class names can change.
    *
-   * @return {string}
+   * @name toString
+   * @function
+   * @memberof Dollarsign
+   * @instance
    */
   get [Symbol.toStringTag]() {
     return "Dollarsign";
