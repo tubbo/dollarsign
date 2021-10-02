@@ -10,13 +10,16 @@ manipulation.
 Install Dollarsign with NPM:
 
 ```bash
-npm install dollarsign --save
+$ npm install dollarsign --save
 ```
 
-Dollarsign is packaged as an ES6 module, so unlike jQuery the `$` function
-is not enabled globally by default. In order to use Dollarsign, you will
-first need to import `$` (the default exported function) from the
-`'dollarsign'` module:
+Or Yarn:
+
+```bash
+$ yarn add dollarsign
+```
+
+You can then import the `$` factory function:
 
 ```javascript
 import $ from "dollarsign";
@@ -48,9 +51,42 @@ $("#change-color").on("click", function (event) {
 Much of the jQuery API is provided, with some notable exceptions (like
 `$.ajax`).
 
+### Programmatic Usage
+
+You can also use the `Dollarsign` class on its own and build your own
+factory function:
+
+```javascript
+import { Dollarsign } from "dollarsign";
+
+function $(selector) {
+  return new Dollarsign(document, selector);
+}
+```
+
+### Plugins
+
+Plugins are similar to the jQuery implementation:
+
+```javascript
+$.fn.plugin = function () {
+  this.each((element) => {
+    $(element).addClass("plugined");
+  });
+};
+
+$("#element").plugin();
+$("#element").hasClass("plugined"); // => true
+```
+
+### API Documentation
+
+For more information about what API methods are implemented, visit the
+documentation at https://tubbo.github.io/dollarsign
+
 ## Development
 
-To compile Dollarsign locally, download the Git repository:
+To contribute to Dollarsign, download the Git repository:
 
 ```bash
 $ git clone https://github.com/tubbo/dollarsign.git
@@ -63,16 +99,39 @@ Then, install dependencies:
 $ yarn install
 ```
 
-Finally, run `yarn build` to build the `nquery.js` file locally:
-
-```bash
-$ yarn build
-```
-
-You can now access the fully compiled file at **dollarsign.js**.
-
-To run tests:
+Make your changes to the `.js` files and run tests to make sure
+everything still works (and write tests for new functionality!):
 
 ```bash
 $ yarn test
 ```
+
+### Static Analysis
+
+We use [Prettier][] for code formatting and [ESLint][] for linting.
+These two tools help us ensure a consistent style and code quality.
+
+Run lint checks to ensure your code matches our style guide:
+
+```bash
+$ yarn lint
+```
+
+If the checks flag anything, reformat your code:
+
+```bash
+$ yarn fmt
+```
+
+### Contributing Documentation
+
+After editing the JSDoc, ensure your documentation looks correctly by
+building it locally:
+
+```bash
+$ yarn docs
+```
+
+Then, open `docs/index.html` in your browser.
+
+
