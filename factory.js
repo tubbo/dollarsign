@@ -11,6 +11,11 @@ import { Dollarsign } from "./dollarsign";
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
 export function $(selector, scope = document) {
+  if (selector.toString() === "[object Dollarsign]") {
+    scope = selector.document;
+    selector = selector.selector;
+  }
+
   return new Dollarsign(scope, selector);
 }
 
