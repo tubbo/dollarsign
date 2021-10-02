@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Dollarsign.html">Dollarsign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#addClass">addClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#attr">attr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#closest">closest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#css">css</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#each">each</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#find">find</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#fire">fire</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#hasClass">hasClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#html">html</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#map">map</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#off">off</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#on">on</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#removeClass">removeClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#toggleClass">toggleClass</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-dollarsign.html">dollarsign</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#$">$</a></span></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>Dollarsign - Native jQuery</h1>
+<p>A small library for native DOM selection and event binding. Wraps
+basic browser functionality into a more consistent API. Supports most of
+jQuery's basic API for event binding, DOM selection, and CSS/attribute
+manipulation.</p>
+<h2>Installation</h2>
+<p>Install Dollarsign with NPM:</p>
+<pre class="prettyprint source lang-bash"><code>$ npm install dollarsign --save
+</code></pre>
+<p>Or Yarn:</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn add dollarsign
+</code></pre>
+<p>You can then import the <code>$</code> factory function:</p>
+<pre class="prettyprint source lang-javascript"><code>import $ from &quot;dollarsign&quot;;
+</code></pre>
+<h2>Usage</h2>
+<p>Use Dollarsign to select DOM elements and bind events:</p>
+<pre class="prettyprint source lang-javascript"><code>import $ from &quot;dollarsign&quot;;
+
+$(&quot;#change-color&quot;).on(&quot;click&quot;, function (event) {
+  event.preventDefault();
+  $(&quot;h1&quot;).css({ color: &quot;#ff000&quot; });
+});
+</code></pre>
+<pre class="prettyprint source lang-html"><code>&lt;body>
+  &lt;h1>I'm different!&lt;/h1>
+
+  &lt;nav>
+    &lt;a href=&quot;#&quot; id=&quot;change-color&quot;>Change Color&lt;/a>
+  &lt;/nav>
+&lt;/body>
+</code></pre>
+<p>Much of the jQuery API is provided, with some notable exceptions (like
+<code>$.ajax</code>).</p>
+<h3>Programmatic Usage</h3>
+<p>You can also use the <code>Dollarsign</code> class on its own and build your own
+factory function:</p>
+<pre class="prettyprint source lang-javascript"><code>import { Dollarsign } from &quot;dollarsign&quot;;
+
+function $(selector) {
+  return new Dollarsign(document, selector);
+}
+</code></pre>
+<h3>Plugins</h3>
+<p>Plugins are similar to the jQuery implementation:</p>
+<pre class="prettyprint source lang-javascript"><code>$.fn.plugin = function () {
+  this.each((element) => {
+    $(element).addClass(&quot;plugined&quot;);
+  });
+};
+
+$(&quot;#element&quot;).plugin();
+$(&quot;#element&quot;).hasClass(&quot;plugined&quot;); // => true
+</code></pre>
+<h3>API Documentation</h3>
+<p>For more information about what API methods are implemented, visit the
+documentation at https://tubbo.github.io/dollarsign</p>
+<h2>Development</h2>
+<p>To contribute to Dollarsign, download the Git repository:</p>
+<pre class="prettyprint source lang-bash"><code>$ git clone https://github.com/tubbo/dollarsign.git
+$ cd dollarsign
+</code></pre>
+<p>Then, install dependencies:</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn install
+</code></pre>
+<p>Make your changes to the <code>.js</code> files and run tests to make sure
+everything still works (and write tests for new functionality!):</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn test
+</code></pre>
+<h3>Static Analysis</h3>
+<p>We use [Prettier][] for code formatting and [ESLint][] for linting.
+These two tools help us ensure a consistent style and code quality.</p>
+<p>Run lint checks to ensure your code matches our style guide:</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn lint
+</code></pre>
+<p>If the checks flag anything, reformat your code:</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn fmt
+</code></pre>
+<h3>Contributing Documentation</h3>
+<p>After editing the JSDoc, ensure your documentation looks correctly by
+building it locally:</p>
+<pre class="prettyprint source lang-bash"><code>$ yarn docs
+</code></pre>
+<p>Then, open <code>docs/index.html</code> in your browser.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Oct 02 2021 02:41:27 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

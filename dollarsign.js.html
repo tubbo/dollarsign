@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>dollarsign.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Dollarsign.html">Dollarsign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#addClass">addClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#attr">attr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#closest">closest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#css">css</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#each">each</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#find">find</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#fire">fire</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#hasClass">hasClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#html">html</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#map">map</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#off">off</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#on">on</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#removeClass">removeClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Dollarsign.html#toggleClass">toggleClass</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-dollarsign.html">dollarsign</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#$">$</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">dollarsign.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * The Dollarsign object represents a collection of DOM elements grouped by the given
+ * `selector`. Wraps basic browser functionality into a more consistent
+ * and concise API.
+ *
+ * @class
+ */
+export class Dollarsign {
+  /**
+   * Query the given DOM object (or scope) for elements matching selector.
+   *
+   * @param EventTarget scope - DOM object to manipulate
+   * @param String selector - Element query
+   */
+  constructor(scope, selector) {
+    this.document = scope;
+    this.selector = selector;
+    this.events = {};
+  }
+
+  /**
+   * All elements matching the given `selector`.
+   *
+   * @return {Array&lt;Element>}
+   * @readonly
+   * @private
+   */
+  get elements() {
+    if (!this.selector) return [this.document];
+
+    let nodes = [];
+
+    if (Array.isArray(this.document)) {
+      for (const scope of this.document) {
+        nodes = [...nodes, ...scope.querySelectorAll(this.selector)];
+      }
+    } else {
+      nodes = this.document.querySelectorAll(this.selector) || [];
+    }
+
+    return nodes;
+  }
+
+  /**
+   * Counts results in the query.
+   *
+   * @return {Number} Count of all elements matched by the selector.
+   * @readonly
+   */
+  get length() {
+    return this.elements.length;
+  }
+
+  /**
+   * Configure this class as an "iterator", meaning it can be used in
+   * `for..of` loops and indexed by number.
+   *
+   * @return {string}
+   */
+  *[Symbol.iterator]() {
+    for (const element of this.elements) {
+      yield element;
+    }
+  }
+
+  /**
+   * Class name of this object.
+   *
+   * @return {string}
+   */
+  get [Symbol.toStringTag]() {
+    return "Dollarsign";
+  }
+
+  /**
+   * Function executed when iterating over a collection of DOM elements.
+   *
+   * @callback Dollarsign~elementIterator
+   * @param {Dollarsign} element - Each element selected from the DOM.
+   * @param {Number} index - Index number of each element in the Array.
+   */
+
+  /**
+   * Iterate over every element with the given callback function.
+   *
+   * @param {elementIterator} callback - Function to call on each iteration.
+   * @return {Dollarsign} this object
+   */
+  each(callback) {
+    for (const element of this) {
+      callback(element);
+    }
+
+    return this;
+  }
+
+  /**
+   * Iterate over every element with the given callback function and
+   * return a new array with the return result of each callback.
+   *
+   * @param {elementIterator} callback - Function to call on each iteration.
+   * @return {Array}
+   */
+  map(callback) {
+    return this.elements.map(callback);
+  }
+
+  /**
+   * Function executed when a DOM event is triggered.
+   *
+   * @callback Dollarsign~eventListener
+   * @param {Event} event - Triggered event object.
+   */
+
+  /**
+   * Bind an event to the elements in this selection.
+   *
+   * @param {string} event - Name of the event to be bound.
+   * @param {eventListener} listener - Function to be executed when event fires.
+   * @return {Dollarsign} this object
+   */
+  on(event, listener) {
+    this.each((element) => element.addEventListener(event, listener));
+    this.events[event] = listener;
+    return this;
+  }
+
+  /**
+   * Unbind an event from the elements in this selection.
+   *
+   * @param {string} event - Name of the event to be unbound.
+   * @return {Dollarsign} this object
+   */
+  off(event) {
+    const handler = this.events[event];
+
+    this.each((element) => element.removeEventListener(event, handler));
+
+    delete this.events[event];
+
+    return this;
+  }
+
+  /**
+   * Trigger an event on all elements in this object.
+   *
+   * @param {string} event - Name of the event to trigger.
+   * @return {Dollarsign} this object
+   */
+  fire(name) {
+    const event = new CustomEvent(name);
+
+    return this.each((element) => element.dispatchEvent(event));
+  }
+
+  /**
+   * Alter CSS for all elements in the selection.
+   *
+   * @param {object} updates - Hash of CSS rules to apply to each element.
+   * @return {Dollarsign} this object
+   */
+  css(rule, value) {
+    if (rule &amp;&amp; typeof value === "undefined") {
+      return this.elements[0].style[rule];
+    }
+
+    this.each((element) => (element.style[rule] = value));
+
+    return this;
+  }
+
+  /**
+   * Alter attributes for all elements in the selection.
+   *
+   * @param {object} updates - Hash of attribute updates to apply to each element.
+   * @return {Dollarsign} this object
+   */
+  attr(name, value) {
+    if (name &amp;&amp; typeof value === "undefined") {
+      return this.elements[0].getAttribute(name);
+    }
+
+    this.each((element) => element.setAttribute(name, value));
+
+    return this;
+  }
+
+  // TODO: Not working
+  text(content) {
+    if (content) {
+      this.each((element) => (element.innerText = content));
+    }
+
+    return this.elements[0].innerText;
+  }
+
+  /**
+   * Return the inner HTML of the element.
+   *
+   * @param {string} content (optional) - Set the inner HTML.
+   * @return {string}
+   */
+  html(content) {
+    if (content) {
+      this.each((element) => (element.innerHTML = content));
+    }
+
+    return this.elements[0].innerHTML;
+  }
+
+  /**
+   * Return an Dollarsign object for DOM elements undernerath this selector.
+   *
+   * @param {string} selector - CSS selector to search for.
+   * @return {Dollarsign} New Dollarsign object representing selection.
+   */
+  find(selector) {
+    const scope = this.elements[0];
+
+    return new Dollarsign(scope, selector);
+  }
+
+  /**
+   * Return an Dollarsign object for DOM elements above this selector.
+   *
+   * @param {string} selector - CSS Selector to search for.
+   * @return {Dollarsign} New Dollarsign object representing selection.
+   */
+  closest(selector) {
+    const scope = this.elements[0].parentElement.parentElement;
+
+    return new Dollarsign(scope, selector);
+  }
+
+  /**
+   * Test whether the given class is associated with these elements.
+   *
+   * @param {string} name
+   * @return {boolean} `true` if class is applied to given element, `false` otherwise.
+   */
+  hasClass(name) {
+    let result = false;
+
+    this.each(function (element) {
+      if (!result) {
+        result = element.classList.contains(name);
+      }
+    });
+
+    return result;
+  }
+
+  /**
+   * Add class name to elements in query.
+   *
+   * @param {string} name - Name of the class to add.
+   * @return {Dollarsign} this object.
+   */
+  addClass(name) {
+    this.each(function (element) {
+      element.classList.add(name);
+    });
+    return this;
+  }
+
+  /**
+   * Remove class name from elements in query.
+   *
+   * @param {string} name - Name of the class to remove.
+   * @return {Dollarsign} this object.
+   */
+  removeClass(name) {
+    this.each(function (element) {
+      element.classList.remove(name);
+    });
+
+    return this;
+  }
+
+  /**
+   * Removes a class if the element(s) have it attached, otherwise adds
+   * class to each element.
+   *
+   * @param {string} name - Class name.
+   * @return {Dollarsign} this object
+   */
+  toggleClass(name) {
+    if (this.hasClass(name)) {
+      this.removeClass(name);
+    } else {
+      this.addClass(name);
+    }
+
+    return this;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Oct 02 2021 02:41:27 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
