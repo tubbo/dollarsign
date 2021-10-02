@@ -1,6 +1,6 @@
 /**
-  * @module dom
-  */
+ * @module dom
+ */
 
 import { Dollarsign } from "./dollarsign";
 

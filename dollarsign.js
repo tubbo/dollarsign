@@ -33,7 +33,6 @@ export class Dollarsign {
    *
    * @return {Array<Element>}
    * @readonly
-   * @private
    */
   get elements() {
     if (typeof this.selector !== "string") return [this.selector];
