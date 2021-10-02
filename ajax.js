@@ -1,5 +1,10 @@
+/**
+ * @module ajax
+ */
+
 import { $ } from "./factory";
-import { html } from "./dom";
+import { html, find } from "./dom";
+import { reduce } from "./enumeration";
 
 /**
  * Load the contents of an external URL into the elements matched by
@@ -18,4 +23,21 @@ export async function load(url, body) {
   $.fn.html = html;
 
   return this.each((element) => $(element).html(content));
+}
+
+export function serialize() {
+  $.fn.find = find;
+  $.fn.reduce = reduce;
+
+  const params = new URLSearchParams(
+    $(this)
+      .find("input")
+      .reduce((element, accumulator) => {
+        accumulator[element.name] = element.value;
+
+        return accumulator;
+      }, {})
+  );
+
+  return params.toString();
 }
