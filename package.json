@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
     "docs": "jsdoc . -d docs",
     "clean": "rm -rf docs",
     "check": "prettier --check .",
@@ -43,18 +42,14 @@
     "babel-core": "^6.25.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.2.4",
-    "babel-loader": "^7.1.1",
     "eslint": "^7.32.0",
-    "eslint-loader": "^1.9.0",
     "eslint-plugin-jest": "^24.5.0",
     "eslint-plugin-jest-dom": "^3.9.2",
     "jest": "^27.2.4",
     "jest-extended": "^0.11.5",
     "jsdoc": "^3.6.4",
     "minami": "^1.1.1",
-    "node-qunit-phantomjs": "^1.4.0",
     "prettier": "^2.4.1",
-    "qunit": "^0.9.1",
     "semantic-release": "^18.0.0"
   },
   "jest": {
