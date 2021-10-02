@@ -4,7 +4,8 @@ on:
     branches:
       - master
 jobs:
-  deploy:
+  docs:
+    name: Generate Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,5 +20,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          deploy_key: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           publish_dir: ./docs

@@ -22,8 +22,8 @@ jobs:
           key: ${{ hashFiles('yarn.lock') }}
       - run: yarn install --check-cache
         if: steps.cache.outputs.cache-hit != 'true'
-      - run: yarn lint
       - run: yarn check
+      - run: yarn lint
   test:
     runs-on: ubuntu-latest
     steps:
