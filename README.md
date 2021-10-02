@@ -138,6 +138,11 @@ everything still works (and write tests for new functionality!):
 $ yarn test
 ```
 
+We use [Jest][] for our test runner, and [Babel][] to compile our
+JavaScript to a format that Jest will understand. Since Jest does not
+yet support ESModules syntax out of the box, we need to use `babel-jest`
+here to transpile our syntax.
+
 ### Static Analysis
 
 We use [Prettier][] for code formatting and [ESLint][] for linting.
@@ -157,7 +162,7 @@ $ yarn fmt
 
 ### Contributing Documentation
 
-After editing the JSDoc, ensure your documentation looks correctly by
+After editing the [JSDoc][], ensure your documentation looks correctly by
 building it locally:
 
 ```bash
@@ -165,3 +170,8 @@ $ yarn docs
 ```
 
 Then, open `docs/index.html` in your browser.
+
+[prettier]: https://prettier.io
+[eslint]: https://eslint.org
+[jsdoc]: https://jsdoc.app/
+[jest]: https://jestjs.io

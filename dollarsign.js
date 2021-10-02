@@ -13,8 +13,8 @@ export class Dollarsign {
   /**
    * Query the given DOM object (or scope) for elements matching selector.
    *
-   * @param EventTarget scope - DOM object to manipulate
-   * @param String selector - Element query
+   * @param {Element | Document} scope - DOM object to manipulate
+   * @param {string} selector - Element query
    */
   constructor(scope, selector) {
     this.document = scope;
@@ -29,7 +29,10 @@ export class Dollarsign {
   }
 
   /**
-   * All elements matching the given `selector`.
+   * All elements matching the given `selector`. This is calculated
+   * using `querySelectorAll()` if a string selector is given.
+   * Otherwise, we assume the selector is a wrapped element and return
+   * it as a single-position Array.
    *
    * @return {Array<Element>}
    * @readonly
@@ -41,9 +44,11 @@ export class Dollarsign {
   }
 
   /**
-   * Counts results in the query.
+   * Counts results in the query. As this depends on `this.elements`, it
+   * is also read-only and is calculated based on the value of that
+   * computed attribute.
    *
-   * @return {Number} Count of all elements matched by the selector.
+   * @return {number} Count of all elements matched by the selector.
    * @readonly
    */
   get length() {
@@ -52,9 +57,8 @@ export class Dollarsign {
 
   /**
    * Configure this class as an "iterator", meaning it can be used in
-   * `for..of` loops and indexed by number.
-   *
-   * @return {string}
+   * `for..of` loops. This is what's used under the hood by `each()` to
+   * iterate over every element.
    */
   *[Symbol.iterator]() {
     for (const element of this.elements) {
@@ -63,7 +67,8 @@ export class Dollarsign {
   }
 
   /**
-   * Class name of this object.
+   * Class name of this object. Identifies Dollarsign objects so that we
+   * can detect them in the factory function and act accordingly.
    *
    * @return {string}
    */
@@ -87,7 +92,7 @@ export class Dollarsign {
    */
   each(callback) {
     for (const element of this) {
-      const item = $(element);
+      const item = new Dollarsign(this.scope, element);
       const iterate = callback.bind(item);
 
       iterate(element);

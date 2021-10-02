@@ -4,7 +4,7 @@
   "description": "DOM selection and manipulation library for native APIs",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config .jestrc.json",
     "docs": "jsdoc -c .jsdoc.json",
     "clean": "rm -rf docs",
     "check": "prettier --check .",
@@ -45,13 +45,5 @@
     "minami": "^1.2.3",
     "prettier": "^2.4.1",
     "semantic-release": "^18.0.0"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [
-      "jest-extended",
-      "regenerator-runtime/runtime",
-      "cross-fetch/polyfill"
-    ]
   }
 }
