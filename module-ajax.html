@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>dollarsign.js - Documentation</title>
+    <title>ajax - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,181 +29,431 @@
 
 <div id="main">
     
-    <h1 class="page-title">dollarsign.js</h1>
+    <h1 class="page-title">ajax</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { $ } from "./factory";
+        
+            
+        
+    
+</header>
 
-/**
- * The Dollarsign object represents a collection of DOM elements grouped by the given
- * `selector`. Wraps basic browser functionality into a more consistent
- * and concise API. The implementation of this class contains only the
- * bare minimum necessary to implement all of Dollarsign's
- * functionality, and the rest of it is implemented in various modules.
- *
- * @class
- */
-export class Dollarsign {
-  /**
-   * Query the given DOM object (or scope) for elements matching selector.
-   *
-   * @constructor
-   * @param {Element | Document} scope - DOM object to manipulate
-   * @param {string} selector - Element query
-   */
-  constructor(scope, selector) {
-    this.document = scope;
-    this.selector = selector;
-    this.events = {};
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">This module wraps the `fetch` API and handles any kind of HTTP
+interaction, including serialization of form parameters.</div>
+        
 
-    for (const [name, plugin] of Object.entries($.fn)) {
-      if (!plugin) throw new Error(`Couldn't load plugin "${name}"`);
+        
+            
+<div class="section-method">
 
-      this[name] = plugin.bind(this);
-    }
 
-    return new Proxy(this, {
-      get: (target, propKey, receiver) => {
-        if (typeof propKey === "string" &amp;&amp; this.#isSafeArrayIndex(propKey)) {
-          return Reflect.get(this.elements, propKey);
-        }
-        return Reflect.get(target, propKey, receiver);
-      },
-      set: (target, propKey, value, receiver) => {
-        if (typeof propKey === "string" &amp;&amp; this.#isSafeArrayIndex(propKey)) {
-          return Reflect.set(this.elements, propKey, value);
-        }
-        return Reflect.set(target, propKey, value, receiver);
-      },
-    });
-  }
 
-  /**
-   * Test whether the given key that we are trying to resolve can be
-   * used as an Array index. This is for internal use only, and allows
-   * for Array-like behavior such as responding to `$('.selector')[0]`.
-   *
-   * @param {string | number} propKey
-   * @return {boolean}
-   * @private
-   */
-  #isSafeArrayIndex(propKey) {
-    const uint = Number.parseInt(propKey, 10);
-    const s = uint + "";
 
-    return propKey === s &amp;&amp; uint !== 0xffffffff &amp;&amp; uint &lt; this.length;
-  }
 
-  /**
-   * All elements matching the given `selector`. This is calculated
-   * using `querySelectorAll()` if a string selector is given.
-   * Otherwise, we assume the selector is a wrapped element and return
-   * it as a single-position Array.
-   *
-   * @return {Array&lt;Element>}
-   * @readonly
-   */
-  get elements() {
-    if (typeof this.selector !== "string") return [this.selector];
-    if (
-      Array.isArray(this.document) ||
-      NodeList.prototype.isPrototypeOf(this.document)
-    ) {
-      const elements = [];
 
-      this.document.forEach((document) => {
-        document.querySelectorAll(this.selector).forEach((element) => {
-          if (!elements.includes(element)) {
-            elements.push(element);
-          }
-        });
-      });
 
-      return elements;
-    }
+<dl class="details">
 
-    return this.document.querySelectorAll(this.selector);
-  }
+    
 
-  /**
-   * Counts results in the query. As this depends on `this.elements`, it
-   * is also read-only and is calculated based on the value of that
-   * computed attribute.
-   *
-   * @return {number} Count of all elements matched by the selector.
-   * @readonly
-   */
-  get length() {
-    return this.elements.length;
-  }
+    
 
-  /**
-   * Allow iteration over this object using `for..of` loops. This is
-   * also used to iterate over objects with `this.each()`, but with
-   * that function we provide a bit more functionality. This will only
-   * iterate over the elements and not change the `this` or wrap each
-   * element in a Dollarsign object.
-   * @name iterator
-   * @function
-   * @memberof Dollarsign
-   * @instance
-   * @generator
-   */
-  *[Symbol.iterator]() {
-    for (const element of this.elements) {
-      yield element;
-    }
-  }
+    
 
-  /**
-   * This allows us to identify Dollarsign objects without needing to
-   * use `instanceof`. In bundled environments, `instanceof` doesn't
-   * work because the class names can change.
-   *
-   * @name toString
-   * @function
-   * @memberof Dollarsign
-   * @instance
-   */
-  get [Symbol.toStringTag]() {
-    return "Dollarsign";
-  }
+    
 
-  /**
-   * Function executed when iterating over a collection of DOM elements.
-   *
-   * @callback Dollarsign~elementIterator
-   * @param {Dollarsign} element - Each element selected from the DOM.
-   * @param {Number} index - Index number of each element in the Array.
-   */
+    
 
-  /**
-   * Iterate over every element with the given callback function.
-   *
-   * @param {elementIterator} callback - Function to call on each iteration.
-   * @return {Dollarsign} this object
-   */
-  each(callback) {
-    for (const element of this) {
-      const item = new Dollarsign(this.scope, element);
-      const iterate = callback.bind(item);
+    
 
-      iterate(element);
-    }
+    
 
-    return this;
-  }
-}
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ajax.js.html">ajax.js</a>, <a href="ajax.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".load"><span class="type-signature">(async, static) </span>load<span class="signature">(url, body)</span><span class="type-signature"> &rarr; {<a href="Dollarsign.html">Dollarsign</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Load the contents of an external URL into the elements matched by
+this query. When a second `body` argument is passed, assume this
+will be a POST request, otherwise it will be a GET request.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ajax.js.html">ajax.js</a>, <a href="ajax.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                URL to load into this element as HTML.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                (optional) POST body to send along with the URL.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code><a href="Dollarsign.html">Dollarsign</a></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    this object
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".serialize"><span class="type-signature">(static) </span>serialize<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Convert the values of form controls into URL-encoded params that can
+be sent along the wire.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ajax.js.html">ajax.js</a>, <a href="ajax.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>string</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    URL-encoded params matching the values of each
+input.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
