@@ -1,6 +1,6 @@
 {
   "name": "dollarsign",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "DOM selection and manipulation library for native APIs",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
     "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
     "@testing-library/dom": "^8.7.1",
     "@testing-library/jest-dom": "^5.14.1",
     "babel-core": "^6.26.3",
