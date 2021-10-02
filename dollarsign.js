@@ -71,6 +71,22 @@ export class Dollarsign {
    */
   get elements() {
     if (typeof this.selector !== "string") return [this.selector];
+    if (
+      Array.isArray(this.document) ||
+      NodeList.prototype.isPrototypeOf(this.document)
+    ) {
+      const elements = [];
+
+      this.document.forEach((document) => {
+        document.querySelectorAll(this.selector).forEach((element) => {
+          if (!elements.includes(element)) {
+            elements.push(element);
+          }
+        });
+      });
+
+      return elements;
+    }
 
     return this.document.querySelectorAll(this.selector);
   }

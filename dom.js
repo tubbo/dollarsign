@@ -18,7 +18,15 @@ export function text(content) {
     return this.each((element) => (element.textContent = content));
   }
 
-  return this.elements[0].textContent;
+  const values = [];
+
+  this.each((element) => {
+    values.push(element.textContent);
+  });
+
+  if (values.length <= 1) return values[0];
+
+  return values;
 }
 
 /**
@@ -32,7 +40,15 @@ export function html(content) {
     return this.each((element) => (element.innerHTML = content));
   }
 
-  return this.elements[0].innerHTML;
+  const values = [];
+
+  this.each((element) => {
+    values.push(element.innerHTML);
+  });
+
+  if (values.length <= 1) return values[0];
+
+  return values;
 }
 
 /**
@@ -42,9 +58,7 @@ export function html(content) {
  * @return {Dollarsign} New Dollarsign object representing selection.
  */
 export function find(selector) {
-  const scope = this.elements[0];
-
-  return new Dollarsign(scope, selector);
+  return new Dollarsign(this.elements, selector);
 }
 
 /**
@@ -54,7 +68,13 @@ export function find(selector) {
  * @return {Dollarsign} New Dollarsign object representing selection.
  */
 export function closest(selector) {
-  const scope = this.elements[0].parentElement.parentElement;
+  const scope = [];
+
+  this.each((element) => {
+    if (element?.parentElement?.parentElement) {
+      scope.push(element.parentElement.parentElement);
+    }
+  });
 
   return new Dollarsign(scope, selector);
 }
@@ -62,10 +82,13 @@ export function closest(selector) {
 /**
  * Alter attributes for all elements in the selection.
  *
- * @param {object} updates - Hash of attribute updates to apply to each element.
- * @return {Dollarsign} this object
+ * @param {string} name
+ * @param {string | null} value
+ * @return {Dollarsign | string | null}
  */
 export function attr(name, value) {
+  if (!this.length) return null;
+
   if (name && typeof value === "undefined") {
     return this.elements[0].getAttribute(name);
   }

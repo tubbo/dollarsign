@@ -1,10 +1,14 @@
 {
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "extends": ["eslint:recommended", "plugin:jest/recommended", "prettier"],
   "plugins": ["jest", "jest-dom"],
   "env": {
     "browser": true,
     "es6": true,
     "node": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-prototype-builtins": "off"
   }
 }
