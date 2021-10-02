@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/tubbo/dollarsign/compare/v1.1.0...v1.1.1) (2021-10-02)
+
+
+### Bug Fixes
+
+* remove core component from gitignore ([7affc5d](https://github.com/tubbo/dollarsign/commit/7affc5d2449c3ed7cd35fc421b23d8fb8ac59484))
+
 # [1.1.0](https://github.com/tubbo/dollarsign/compare/v1.0.0...v1.1.0) (2021-10-02)
 
 
