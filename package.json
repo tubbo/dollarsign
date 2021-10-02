@@ -13,6 +13,13 @@
     "fmt": "prettier --write . && eslint --fix .",
     "release": "semantic-release"
   },
+  "files": [
+    "dollarsign.js",
+    "factory.js",
+    "index.js",
+    "index.d.ts",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tubbo/dollarsign.git"

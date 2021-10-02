@@ -23,6 +23,7 @@ export class Dollarsign {
    *
    * @return {Array<Element>}
    * @readonly
+   * @private
    */
   get elements() {
     if (!this.selector) return [this.document];

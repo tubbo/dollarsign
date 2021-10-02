@@ -11,5 +11,13 @@ import { Dollarsign } from "./dollarsign";
  * @author Tom Scott <tubbo@psychedeli.ca>
  */
 export function $(selector, scope = document) {
-  return new Dollarsign(scope, selector);
+  const dollarsign = new Dollarsign(scope, selector);
+
+  for (const [name, plugin] of Object.entries($.fn)) {
+    dollarsign[name] = plugin.bind(dollarsign);
+  }
+
+  return dollarsign;
 }
+
+$.fn = {};

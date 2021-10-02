@@ -3,7 +3,18 @@ import $ from "../";
 describe("Dollarsign", () => {
   beforeEach(() => {
     document.write(
-      `<div id="test" /></div><div class="test" /><div class="test" /><div id="parent"><div id="child" /></div><div id="html"><strong>foo</strong></div><div id="text">foo</div>`
+      `
+        <div id="test" />
+        <div class="test" />
+        <div class="test" />
+        <div id="parent">
+          <div id="child" />
+        </div>
+        <p id="html">
+          <strong>foo</strong>
+        </p>
+        <p id="text">foo</p>
+      `
     );
   });
 
@@ -69,7 +80,7 @@ describe("Dollarsign", () => {
   });
 
   test("content", () => {
-    expect($("#html").html()).toEqual("<strong>foo</strong>");
+    expect($("#html").html()).toMatch("<strong>foo</strong>");
   });
 
   test("traversal", () => {
@@ -78,5 +89,11 @@ describe("Dollarsign", () => {
 
     expect(parent.find("#child").attr("id")).toEqual("child");
     expect(child.closest("#parent").attr("id")).toEqual("parent");
+  });
+
+  test("plugins", () => {
+    $.fn.foo = () => "bar";
+
+    expect($("#test").foo()).toEqual("bar");
   });
 });
