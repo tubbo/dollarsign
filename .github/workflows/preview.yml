@@ -1,0 +1,26 @@
+name: Preview Documentation Changes
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  docs:
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: metadata
+        run: |-
+          echo "##[set-output name=node-version;]$(cat .node-version)"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.metadata.outputs.node-version }}
+          cache: yarn
+      - id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ hashFiles('yarn.lock') }}
+      - run: yarn install --check-cache
+        if: steps.cache.outputs.cache-hit != 'true'
+      - run: yarn docs
+      - run: yarn dlx surge ./docs --token dollarsign-pr-${{ github.event.pr_number }} ${{ secrets.SURGE_TOKEN }}

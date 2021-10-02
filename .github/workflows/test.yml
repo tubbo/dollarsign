@@ -5,9 +5,11 @@ on:
       - master
 jobs:
   lint:
+    name: Run Code Style Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: wagoid/commitlint-github-action@v4
       - id: metadata
         run: |-
           echo "##[set-output name=node-version;]$(cat .node-version)"
@@ -25,6 +27,7 @@ jobs:
       - run: yarn check
       - run: yarn lint
   test:
+    name: Run Automated Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

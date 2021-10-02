@@ -5,20 +5,17 @@ on:
       - master
 jobs:
   docs:
-    name: Generate Documentation
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v2
-      - name: Generate JSDoc
-        uses: andstor/jsdoc-action@v1
+      - uses: actions/checkout@v2
+      - uses: andstor/jsdoc-action@v1
         with:
           source_dir: .
           output_dir: ./docs
           template: minami
           front_page: README.md
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+      - uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
           folder: docs
