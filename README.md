@@ -133,5 +133,3 @@ $ yarn docs
 ```
 
 Then, open `docs/index.html` in your browser.
-
-
