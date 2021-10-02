@@ -1,9 +1,9 @@
 /**
-  * This module contains utility functions for iterating over elements,
-  * such as `map` and `reduce`.
-  *
-  * @module enumeration
-  */
+ * This module contains utility functions for iterating over elements,
+ * such as `map` and `reduce`.
+ *
+ * @module enumeration
+ */
 
 /*
  * Iterate over every element with the given callback function and
