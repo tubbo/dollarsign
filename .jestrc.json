@@ -1,8 +1,4 @@
 {
   "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": [
-    "jest-extended",
-    "regenerator-runtime/runtime",
-    "cross-fetch/polyfill"
-  ]
+  "setupFilesAfterEnv": ["jest-extended", "regenerator-runtime/runtime"]
 }
