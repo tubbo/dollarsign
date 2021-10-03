@@ -2,6 +2,14 @@
   "name": "dollarsign",
   "version": "1.1.1",
   "description": "DOM selection and manipulation library for native APIs",
+  "homepage": "https://tubbo.github.io/dollarsign",
+  "bugs": {
+    "url": "https://github.com/tubbo/dollarsign/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tubbo/dollarsign.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "jest --config .jestrc.json",
@@ -16,13 +24,8 @@
   "files": [
     "*.js",
     "*.d.ts",
-    "README.md",
     "package.json"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tubbo/dollarsign.git"
-  },
   "keywords": [
     "dollarsign",
     "jquery",
@@ -30,10 +33,6 @@
   ],
   "author": "Tom Scott",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tubbo/dollarsign/issues"
-  },
-  "homepage": "https://tubbo.github.io/dollarsign",
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
     "@semantic-release/changelog": "^6.0.0",
