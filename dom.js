@@ -15,18 +15,14 @@ import { Dollarsign } from "./dollarsign";
  */
 export function text(content) {
   if (content) {
-    return this.each((element) => (element.textContent = content));
+    return this.each((element) => {
+      element.textContent = content;
+    });
   }
 
-  const values = [];
+  if (!this.length) return null;
 
-  this.each((element) => {
-    values.push(element.textContent);
-  });
-
-  if (values.length <= 1) return values[0];
-
-  return values;
+  return this.elements[0].textContent;
 }
 
 /**
@@ -37,18 +33,14 @@ export function text(content) {
  */
 export function html(content) {
   if (content) {
-    return this.each((element) => (element.innerHTML = content));
+    return this.each((element) => {
+      element.innerHTML = content;
+    });
   }
 
-  const values = [];
+  if (!this.length) return null;
 
-  this.each((element) => {
-    values.push(element.innerHTML);
-  });
-
-  if (values.length <= 1) return values[0];
-
-  return values;
+  return this.elements[0].innerHTML;
 }
 
 /**
@@ -87,10 +79,10 @@ export function closest(selector) {
  * @return {Dollarsign | string | null}
  */
 export function attr(name, value) {
-  if (!this.length) return null;
-
   if (name && typeof value === "undefined") {
-    return this.elements[0].getAttribute(name);
+    const [element] = this.elements;
+
+    return element?.getAttribute(name);
   }
 
   this.each((element) => element.setAttribute(name, value));
