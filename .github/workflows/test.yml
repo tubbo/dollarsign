@@ -4,8 +4,8 @@ on:
     branches-ignore:
       - master
 jobs:
-  lint:
-    name: Run Code Style Checks
+  check:
+    name: Code Style Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,10 +27,31 @@ jobs:
       - run: yarn install --check-cache
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn check
+  lint:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v4
+      - id: metadata
+        run: |-
+          echo "##[set-output name=node-version;]$(cat .node-version)"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.metadata.outputs.node-version }}
+          cache: yarn
+      - id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ hashFiles('yarn.lock') }}
+      - run: yarn install --check-cache
+        if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn lint
-      - run: yarn types
   test:
-    name: Run Automated Tests
+    name: Automated Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,3 +70,26 @@ jobs:
       - run: yarn install --check-cache
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn test --ci
+  types:
+    name: Type Definitions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v4
+      - id: metadata
+        run: |-
+          echo "##[set-output name=node-version;]$(cat .node-version)"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.metadata.outputs.node-version }}
+          cache: yarn
+      - id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ hashFiles('yarn.lock') }}
+      - run: yarn install --check-cache
+        if: steps.cache.outputs.cache-hit != 'true'
+      - run: yarn types
