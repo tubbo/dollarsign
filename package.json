@@ -13,6 +13,12 @@
     "release": "semantic-release",
     "types": "tsc"
   },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tubbo/dollarsign.git"
