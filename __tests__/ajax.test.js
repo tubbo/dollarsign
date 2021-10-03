@@ -2,6 +2,7 @@ import { $ } from "../factory";
 import { load, serialize } from "../ajax";
 import { find, html } from "../dom";
 import { reduce } from "../enumeration";
+import fetchMock from "fetch-mock";
 
 describe("ajax", () => {
   beforeEach(() => {
@@ -18,11 +19,12 @@ describe("ajax", () => {
 
   test("load", async () => {
     document.write(`<div id="test" />`);
+    fetchMock.mock("http://example.com", "Example Domain");
 
     await $("#test").load("http://example.com");
     await $("#test").load("http://example.com", "foo");
 
-    expect($("#test").html()).toMatch("Example Domain");
+    expect($("#test").html()).toEqual("Example Domain");
   });
 
   test("serialize", () => {
