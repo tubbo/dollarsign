@@ -29,6 +29,7 @@ jobs:
           key: ${{ hashFiles('yarn.lock') }}
       - run: yarn install
         if: steps.cache.outputs.cache-hit != 'true'
+      - run: yarn types
       - run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}

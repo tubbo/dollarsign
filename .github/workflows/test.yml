@@ -28,6 +28,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn check
       - run: yarn lint
+      - run: yarn types
   test:
     name: Run Automated Tests
     runs-on: ubuntu-latest

@@ -10,7 +10,8 @@
     "check": "prettier --check .",
     "lint": "eslint .",
     "fmt": "prettier --write . && eslint --fix .",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "types": "tsc"
   },
   "repository": {
     "type": "git",

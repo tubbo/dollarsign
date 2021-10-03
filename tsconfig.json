@@ -1,5 +1,5 @@
 {
-  // Change this to match your project
+  // Generate `.d.ts` files for all JS code in this project.
   "include": ["*.js"],
   "exclude": ["setup-tests.js"],
   "compilerOptions": {
