@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/tubbo/dollarsign/compare/v1.1.1...v1.1.2) (2021-10-03)
+
+
+### Bug Fixes
+
+* **dom:** match jquery api better ([3f314d3](https://github.com/tubbo/dollarsign/commit/3f314d3093264f58477d4455db2cfce289887800))
+
 ## [1.1.1](https://github.com/tubbo/dollarsign/compare/v1.1.0...v1.1.1) (2021-10-02)
 
 
