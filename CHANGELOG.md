@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/tubbo/dollarsign/compare/v1.1.2...v1.1.3) (2021-10-03)
+
+
+### Bug Fixes
+
+* **typescript:** remove declarations from gitignore ([e57c309](https://github.com/tubbo/dollarsign/commit/e57c3091fe64b0bca19c29761479387706b0ce04))
+
 ## [1.1.2](https://github.com/tubbo/dollarsign/compare/v1.1.1...v1.1.2) (2021-10-03)
 
 
